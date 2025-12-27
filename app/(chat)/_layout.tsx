@@ -85,6 +85,19 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="[chat]"
+        options={{
+          headerTitle: "",
+        }}
+      />
+      <Stack.Screen
+        name="settings/[chat]"
+        options={{
+          headerTitle: "Room Settings",
+          presentation: "modal",
+        }}
+      />
     </Stack>
   );
 }
