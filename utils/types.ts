@@ -1,9 +1,18 @@
+/**
+ * IMPROVEMENT: Updated ChatRoom interface to match Appwrite document structure
+ * - Changed from 'id' to '$id' (Appwrite's document ID field)
+ * - Added Appwrite metadata fields ($collectionId, $databaseId, etc.)
+ * - Changed Date types to string (Appwrite returns ISO date strings)
+ */
 interface ChatRoom {
-  id: string;
+  $id: string;
+  $collectionId?: string;
+  $databaseId?: string;
+  $createdAt?: string;
+  $updatedAt?: string;
+  $permissions?: any[];
   title: string;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 interface Message {

@@ -1,13 +1,34 @@
+import { IconSymbol } from "@/components/icon-symbol";
+import { Text } from "@/components/Text";
+import { appwriteConfig, db } from "@/utils/appwrite";
+import { Gray } from "@/utils/colors";
+import { ChatRoom } from "@/utils/types";
+import { Link } from "expo-router";
 import React from "react";
 import { FlatList, RefreshControl, View } from "react-native";
-import { Link } from "expo-router";
-import { chatRooms } from "@/utils/test-data";
-import { IconSymbol } from "@/components/icon-symbol";
-import { Gray } from "@/utils/colors";
-import { Text } from "@/components/Text";
+import { Query } from "react-native-appwrite";
 
 export default function Index() {
+  const [chatRooms, setChatRooms] = React.useState<ChatRoom[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
+
+  React.useEffect(() => {
+    fetchChatRooms();
+  }, []);
+
+  const fetchChatRooms = async () => {
+    try {
+      const { documents, total } = await db.listDocuments(
+        appwriteConfig.db,
+        appwriteConfig.col.chatrooms,
+        [Query.limit(100)]
+      );
+      console.log(documents, total);
+      setChatRooms(documents as unknown as ChatRoom[]);
+    } catch (error) {
+      console.error("Error fetching chat rooms:", error);
+    }
+  };
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -19,7 +40,7 @@ export default function Index() {
   return (
     <FlatList
       data={chatRooms}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.$id}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
@@ -27,7 +48,7 @@ export default function Index() {
         <Link
           href={{
             pathname: "/[chat]",
-            params: { chat: item.id },
+            params: { chat: item.$id },
           }}
         >
           <View
