@@ -1,4 +1,4 @@
-import { Client, Databases } from "react-native-appwrite";
+import { Client, Databases, ID } from "react-native-appwrite";
 
 // IMPROVEMENT: Validate environment variables to catch configuration errors early
 if (!process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT) {
@@ -41,4 +41,4 @@ client
 
 db = new Databases(client);
 
-export { appwriteConfig, client, db };
+export { appwriteConfig, client, db, ID };

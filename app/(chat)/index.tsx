@@ -23,20 +23,25 @@ export default function Index() {
         appwriteConfig.col.chatrooms,
         [Query.limit(100)]
       );
-      console.log(documents, total);
+      console.log("🚀 Fetched chat rooms:", JSON.stringify(documents, null, 2));
+      console.log("🍺 Total chat rooms:", total);
       setChatRooms(documents as unknown as ChatRoom[]);
     } catch (error) {
       console.error("Error fetching chat rooms:", error);
     }
   };
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
+  const onRefresh = async () => {
+    try {
+      setRefreshing(true);
+      await fetchChatRooms();
+      console.log("🔄 Chat rooms refreshed");
+    } catch (error) {
+      console.error("Error refreshing chat rooms:", error);
+    } finally {
       setRefreshing(false);
-    }, 1300);
-  }, []);
-
+    }
+  };
   return (
     <FlatList
       data={chatRooms}
@@ -94,12 +99,14 @@ export default function Index() {
 
 function ItemTitle({ title }: { title: string }) {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-      <IconSymbol name={"message"} size={16} color={Gray} />
-      <View>
-        <Text style={{ fontSize: 16, fontWeight: "600" }}>{title}</Text>
+    <>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+        <IconSymbol name={"message"} size={16} color={Gray} />
+        <View>
+          <Text style={{ fontSize: 16, fontWeight: "600" }}>{title}</Text>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
