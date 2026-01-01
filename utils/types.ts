@@ -25,7 +25,7 @@ interface Message {
   content: string;
   senderId: string;
   senderName: string;
-  SenderPhoto: string;
+  senderPhoto: string;
   chatRoomId: string;
 }
 

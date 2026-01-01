@@ -1,8 +1,9 @@
 import { useUser } from "@clerk/clerk-expo";
-import { Stack, Redirect, Link } from "expo-router";
+import { Link, Redirect, Stack } from "expo-router";
 
-import { Image } from "react-native";
 import { IconSymbol } from "@/components/icon-symbol";
+import { Primary } from "@/utils/colors";
+import { Image } from "react-native";
 
 export default function RootLayout() {
   const { isSignedIn } = useUser();
@@ -43,7 +44,7 @@ export default function RootLayout() {
                 }}
                 href="/new-room"
               >
-                <IconSymbol name="plus" color={"white"} />
+                <IconSymbol name="plus" color={Primary} />
               </Link>
             );
           },
@@ -62,7 +63,7 @@ export default function RootLayout() {
               dismissTo
               href={"/"}
             >
-              <IconSymbol name="chevron.left" color={"white"} />
+              <IconSymbol name="chevron.left" color={Primary} />
             </Link>
           ),
         }}
@@ -80,7 +81,7 @@ export default function RootLayout() {
               dismissTo
               href={"/"}
             >
-              <IconSymbol name="chevron.left" color={"white"} />
+              <IconSymbol name="chevron.left" color={Primary} />
             </Link>
           ),
         }}

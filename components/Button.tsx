@@ -1,8 +1,13 @@
+import { Primary } from "@/utils/colors";
+import React from "react";
 import { Pressable, PressableProps, Text, ViewStyle } from "react-native";
 
-interface ButtonProps extends PressableProps {
+interface ButtonProps extends Omit<PressableProps, "children"> {
   title?: string;
   variant?: "default" | "header";
+  icon?: React.ReactNode;
+  iconPosition?: "left" | "right";
+  children?: React.ReactNode;
 }
 
 export function Button({
@@ -11,18 +16,24 @@ export function Button({
   title,
   variant = "default",
   disabled,
+  icon,
+  iconPosition = "left",
   ...props
 }: ButtonProps) {
   const displayText = title || children;
 
-  const isHeaderRight = variant === "header";
+  const isHeader = variant === "header";
 
   return (
     <Pressable
       style={[
-        isHeaderRight
+        isHeader
           ? {
-              padding: 0,
+              paddingLeft: 5,
+              paddingRight: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 4,
             }
           : {
               backgroundColor: "white",
@@ -35,20 +46,22 @@ export function Button({
       disabled={disabled}
       {...props}
     >
+      {isHeader && icon && iconPosition === "left" && icon}
       {typeof displayText === "string" ? (
         <Text
           style={[
             {
               textAlign: "center",
               fontWeight: "600",
+              paddingLeft: 5,
+              paddingRight: 0,
             },
-            isHeaderRight && {
-              color: "#ffffffff",
+            isHeader && {
+              color: Primary,
               fontSize: 17,
-              paddingHorizontal: 12,
             },
             disabled &&
-              isHeaderRight && {
+              isHeader && {
                 opacity: 1,
               },
           ]}
@@ -58,6 +71,7 @@ export function Button({
       ) : (
         displayText
       )}
+      {isHeader && icon && iconPosition === "right" && icon}
     </Pressable>
   );
 }
