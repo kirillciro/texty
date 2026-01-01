@@ -1,9 +1,12 @@
 import { Button } from "@/components/Button";
+import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
-import { Gray } from "@/utils/colors";
+import { Gray, Primary } from "@/utils/colors";
 import { useAuth, useUser } from "@clerk/clerk-expo";
+import * as FileSystem from "expo-file-system/legacy";
+import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Alert, Image, TouchableOpacity, View } from "react-native";
 
 export default function Profile() {
   const { user } = useUser();
@@ -19,18 +22,88 @@ export default function Profile() {
     }
   };
 
+  const handleImagePick = async () => {
+    try {
+      // Request permission
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      if (status !== "granted") {
+        Alert.alert(
+          "Permission needed",
+          "Please grant camera roll permissions to change your profile picture."
+        );
+        return;
+      }
+
+      // Pick image
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        const imageUri = result.assets[0].uri;
+
+        // Convert image to base64
+        const base64 = await FileSystem.readAsStringAsync(imageUri, {
+          encoding: "base64",
+        });
+
+        // Upload to Clerk with proper format
+        await user?.setProfileImage({
+          file: `data:image/jpeg;base64,${base64}`,
+        });
+        await user?.reload();
+
+        Alert.alert("Success", "Profile picture updated!");
+      }
+    } catch (error: any) {
+      console.error("Error updating profile image:", error);
+      Alert.alert(
+        "Error",
+        "Failed to update profile picture. Please try again."
+      );
+    }
+  };
+
   return (
     <View style={{ flex: 1, alignItems: "center", padding: 16, gap: 10 }}>
-      <Image
-        source={{ uri: user?.imageUrl }}
+      <TouchableOpacity
+        onPress={handleImagePick}
         style={{
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          alignSelf: "center",
           marginTop: 20,
+          position: "relative",
         }}
-      />
+      >
+        <Image
+          source={{ uri: user?.imageUrl }}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            backgroundColor: Primary,
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            alignItems: "center",
+            justifyContent: "center",
+            borderWidth: 3,
+            borderColor: "#000",
+          }}
+        >
+          <IconSymbol name="camera.fill" size={16} color="white" />
+        </View>
+      </TouchableOpacity>
 
       <View style={{ alignItems: "center", width: "100%" }}>
         <Text style={{ textAlign: "center", marginTop: 10, fontSize: 18 }}>

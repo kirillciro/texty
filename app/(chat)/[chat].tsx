@@ -11,7 +11,6 @@ import * as Haptics from "expo-haptics";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import {
-  ActivityIndicator,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -29,13 +28,58 @@ export default function Chat() {
   const [messageContent, setMessageContent] = React.useState("");
   const [chatRoom, setChatRoom] = React.useState<any>(null);
   const [messages, setMessages] = React.useState<Message[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
   const headerHeightValue = useHeaderHeight();
   const headerHeight = Platform.OS === "ios" ? headerHeightValue : 0;
+  const listRef = React.useRef<any>(null);
+
+  const getChatRoom = React.useCallback(async () => {
+    try {
+      const data = await db.getDocument(
+        appwriteConfig.db,
+        appwriteConfig.col.chatrooms,
+        chatId as string
+      );
+      setChatRoom(data as unknown as ChatRoom);
+    } catch (e) {
+      console.error("❌ Error fetching chat room:", e);
+    }
+  }, [chatId]);
+
+  const getMessages = React.useCallback(async () => {
+    try {
+      const { documents } = await db.listDocuments(
+        appwriteConfig.db,
+        appwriteConfig.col.messages,
+        [
+          Query.equal("chatRoomId", chatId as string),
+          Query.orderAsc("$createdAt"),
+          Query.limit(100),
+        ]
+      );
+
+      setMessages(documents as unknown as Message[]);
+
+      // Scroll to bottom after messages load with delay for smooth rendering
+      setTimeout(() => {
+        listRef.current?.scrollToEnd({ animated: true });
+      }, 500);
+    } catch (e) {
+      console.error("❌ Error fetching messages:", e);
+    }
+  }, [chatId]);
+
+  const handleFirstLoad = React.useCallback(async () => {
+    try {
+      await getMessages();
+      await getChatRoom();
+    } catch (e) {
+      console.error("❌ Error during initial load:", e);
+    }
+  }, [getMessages, getChatRoom]);
 
   React.useEffect(() => {
     handleFirstLoad();
-  }, []);
+  }, [handleFirstLoad]);
 
   React.useEffect(() => {
     if (!chatId) return;
@@ -55,47 +99,7 @@ export default function Chat() {
     return () => {
       unsubscribe();
     };
-  }, [chatId]);
-
-  const handleFirstLoad = async () => {
-    try {
-      await getMessages();
-      await getChatRoom();
-    } catch (e) {
-      console.error("❌ Error during initial load:", e);
-    }
-  };
-
-  const getChatRoom = async () => {
-    try {
-      const data = await db.getDocument(
-        appwriteConfig.db,
-        appwriteConfig.col.chatrooms,
-        chatId as string
-      );
-      setChatRoom(data as unknown as ChatRoom);
-    } catch (e) {
-      console.error("❌ Error fetching chat room:", e);
-    }
-  };
-
-  const getMessages = async () => {
-    try {
-      const { documents, total } = await db.listDocuments(
-        appwriteConfig.db,
-        appwriteConfig.col.messages,
-        [
-          Query.equal("chatRoomId", chatId as string),
-          Query.orderAsc("$createdAt"),
-          Query.limit(100),
-        ]
-      );
-
-      setMessages(documents as unknown as Message[]);
-    } catch (e) {
-      console.error("❌ Error fetching messages:", e);
-    }
-  };
+  }, [chatId, getMessages]);
 
   const sendMessage = async () => {
     if (messageContent.trim() === "") {
@@ -136,18 +140,6 @@ export default function Chat() {
     return <Text>We not found this room</Text>;
   }
 
-  if (isLoading) {
-    return (
-      <>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator />
-        </View>
-      </>
-    );
-  }
-
   return (
     <>
       <Stack.Screen
@@ -173,55 +165,97 @@ export default function Chat() {
           keyboardVerticalOffset={headerHeight}
         >
           <LegendList
+            ref={listRef}
             data={messages}
             renderItem={({ item }) => {
               const isSender = item.senderId === user?.id;
               return (
                 <View
                   style={{
-                    padding: 10,
-                    borderRadius: 10,
-                    flexDirection: "row",
-                    gap: 8,
-                    maxWidth: "80%",
+                    marginVertical: 4,
+                    marginHorizontal: 12,
+                    maxWidth: "75%",
                     alignSelf: isSender ? "flex-end" : "flex-start",
                   }}
                 >
-                  {!isSender && (
-                    <Image
-                      source={{ uri: item.senderPhoto }}
-                      style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: 18,
-                        marginRight: 8,
-                      }}
-                    />
-                  )}
+                  {/* Name and avatar row */}
                   <View
                     style={{
-                      backgroundColor: isSender ? Primary : Secondary,
-                      flex: 1,
-                      padding: 10,
-                      borderRadius: 10,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginBottom: 6,
+                      gap: 8,
+                      alignSelf: isSender ? "flex-end" : "flex-start",
                     }}
                   >
+                    {!isSender && (
+                      <Image
+                        source={{ uri: item.senderPhoto }}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          borderRadius: 12,
+                        }}
+                      />
+                    )}
                     <Text
                       style={{
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: "600",
-                        marginBottom: 4,
+                        color: "rgba(255, 255, 255, 0.7)",
+                        letterSpacing: 0.3,
                       }}
                     >
                       {item.senderName}
                     </Text>
-                    <Text>{item.content}</Text>
+                    {isSender && (
+                      <Image
+                        source={{ uri: item.senderPhoto }}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          borderRadius: 12,
+                        }}
+                      />
+                    )}
+                  </View>
+
+                  {/* Message bubble */}
+                  <View
+                    style={{
+                      backgroundColor: isSender ? Primary : Secondary,
+                      paddingHorizontal: 16,
+                      paddingVertical: 12,
+                      borderRadius: 20,
+                      borderBottomRightRadius: isSender ? 4 : 20,
+                      borderBottomLeftRadius: isSender ? 20 : 4,
+                      borderWidth: 1,
+                      borderColor: isSender
+                        ? "rgba(255, 255, 255, 0.2)"
+                        : "rgba(255, 255, 255, 0.15)",
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 3 },
+                      shadowOpacity: 0.25,
+                      shadowRadius: 6,
+                      elevation: 4,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        lineHeight: 20,
+                        color: "white",
+                      }}
+                    >
+                      {item.content}
+                    </Text>
                     <Text
                       style={{
                         fontSize: 10,
-                        color: "white",
-                        marginTop: 5,
-                        textAlign: "right",
+                        color: "rgba(255, 255, 255, 0.6)",
+                        marginTop: 6,
+                        alignSelf: "flex-end",
+                        fontWeight: "500",
                       }}
                     >
                       {new Date(item.$createdAt!).toLocaleTimeString([], {
@@ -285,7 +319,6 @@ export default function Chat() {
               disabled={messageContent.trim() === ""}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                const currentMessage = messageContent;
                 setMessageContent(""); // Clear input immediately
                 sendMessage();
               }}
