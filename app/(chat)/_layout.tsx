@@ -2,12 +2,14 @@ import { useUser } from "@clerk/clerk-expo";
 import { Link, Redirect, Stack } from "expo-router";
 
 import { IconSymbol } from "@/components/icon-symbol";
-import { Primary } from "@/utils/colors";
-import { Image } from "react-native";
+import { useUserRole } from "@/hooks/useUserRole";
+import { Gold, Primary, Purple } from "@/utils/colors";
+import { Image, View } from "react-native";
 
 export default function RootLayout() {
   const { isSignedIn } = useUser();
   const { user } = useUser();
+  const userRole = useUserRole();
 
   if (!isSignedIn) {
     return <Redirect href="/(auth)" />;
@@ -26,14 +28,39 @@ export default function RootLayout() {
               }}
               href="/profile"
             >
-              <Image
-                source={{ uri: user?.imageUrl }}
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: 16,
-                }}
-              />
+              <View style={{ position: "relative" }}>
+                <Image
+                  source={{ uri: user?.imageUrl }}
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 16,
+                  }}
+                />
+                {(userRole === "admin" || userRole === "editor") && (
+                  <View
+                    style={{
+                      position: "absolute",
+                      bottom: -2,
+                      right: -2,
+                      width: 16,
+                      height: 16,
+                      borderRadius: 8,
+                      backgroundColor: userRole === "admin" ? Gold : Purple,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderWidth: 2,
+                      borderColor: "#000",
+                    }}
+                  >
+                    <IconSymbol
+                      name={userRole === "admin" ? "crown.fill" : "pencil"}
+                      size={8}
+                      color="white"
+                    />
+                  </View>
+                )}
+              </View>
             </Link>
           ),
           headerRight: (props) => {

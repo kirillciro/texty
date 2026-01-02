@@ -1,12 +1,12 @@
-import { View, Image } from "react-native";
+import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Button } from "@/components/Button";
-import * as WebBrowser from "expo-web-browser";
-import * as AuthSession from "expo-auth-session";
 import { isClerkAPIResponseError, useSSO, useSignIn } from "@clerk/clerk-expo";
 import { ClerkAPIError } from "@clerk/types";
+import * as AuthSession from "expo-auth-session";
+import * as WebBrowser from "expo-web-browser";
 import { useState } from "react";
+import { Image, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -55,57 +55,152 @@ export default function Index() {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}
-    >
+    <SafeAreaView style={{ flex: 1 }} edges={["top", "bottom"]}>
       <View
         style={{
           flex: 1,
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
-          padding: 16,
+          padding: 24,
         }}
       >
-        <View style={{ flex: 0.1 }} />
+        {/* Hero Section */}
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <View
+            style={{
+              width: 120,
+              height: 120,
+              borderRadius: 60,
+              backgroundColor: "rgba(255, 255, 255, 0.05)",
+              borderWidth: 2,
+              borderColor: "rgba(255, 255, 255, 0.1)",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 24,
+            }}
+          >
+            <Image
+              source={require("@/assets/images/logo.png")}
+              style={{ width: 80, height: 80 }}
+            />
+          </View>
 
-        <View style={{ gap: 20, alignItems: "center" }}>
-          <Image
-            source={require("@/assets/images/logo.png")}
-            style={{ width: 100, height: 100 }}
-          />
-          <Text style={{ fontSize: 32, fontWeight: "bold" }}>Texty</Text>
-          <Text>Welcome to Texty, your chat rooms to-go.</Text>
-          {errors.map((error) => (
-            <Text key={error.code} style={{ color: "red" }}>
-              {error.message}
-            </Text>
-          ))}
+          <Text
+            style={{
+              fontSize: 42,
+              fontWeight: "800",
+              letterSpacing: 0.5,
+              marginBottom: 12,
+            }}
+          >
+            Texty
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "500",
+              color: "rgba(255, 255, 255, 0.6)",
+              textAlign: "center",
+              lineHeight: 24,
+              paddingHorizontal: 20,
+            }}
+          >
+            Welcome to Texty, your chat rooms to-go.
+          </Text>
+
+          {/* Error Messages */}
+          {errors.length > 0 && (
+            <View
+              style={{
+                marginTop: 20,
+                paddingHorizontal: 16,
+                paddingVertical: 12,
+                borderRadius: 16,
+                backgroundColor: "rgba(255, 59, 48, 0.15)",
+                borderWidth: 1,
+                borderColor: "rgba(255, 59, 48, 0.3)",
+              }}
+            >
+              {errors.map((error) => (
+                <Text
+                  key={error.code}
+                  style={{
+                    color: "#FF3B30",
+                    fontSize: 14,
+                    fontWeight: "500",
+                    textAlign: "center",
+                  }}
+                >
+                  {error.message}
+                </Text>
+              ))}
+            </View>
+          )}
         </View>
 
-        <View style={{ flex: 1 }} />
+        {/* Auth Buttons */}
+        <View style={{ width: "100%", gap: 12, paddingBottom: 20 }}>
+          {/* Passkeys Button */}
+          <TouchableOpacity
+            onPress={handleSignInWithPasskeys}
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
+              paddingVertical: 16,
+              paddingHorizontal: 20,
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: "rgba(255, 255, 255, 0.15)",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+            }}
+          >
+            <IconSymbol name="lock.fill" size={20} color="white" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "700",
+                letterSpacing: 0.3,
+              }}
+            >
+              Sign in with Passkeys
+            </Text>
+          </TouchableOpacity>
 
-        <Button onPress={handleSignInWithPasskeys} style={{ marginBottom: 20 }}>
-          Sign in with PassKeys
-        </Button>
-        <Button
-          onPress={handleSignInWithGoogle}
-          style={{
-            flexDirection: "row",
-            gap: 10,
-            justifyContent: "center",
-            marginBottom: 20,
-          }}
-        >
-          <Image
-            source={require("@/assets/images/google-icon.png")}
-            style={{ width: 20, height: 20 }}
-          />
-          <Text style={{ color: "black", fontWeight: "500" }}>
-            Continue with Google
-          </Text>
-        </Button>
+          {/* Google Button */}
+          <TouchableOpacity
+            onPress={handleSignInWithGoogle}
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.95)",
+              paddingVertical: 16,
+              paddingHorizontal: 20,
+              borderRadius: 20,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
+            <Image
+              source={require("@/assets/images/google-icon.png")}
+              style={{ width: 22, height: 22 }}
+            />
+            <Text
+              style={{
+                color: "#000000",
+                fontSize: 16,
+                fontWeight: "700",
+                letterSpacing: 0.3,
+              }}
+            >
+              Continue with Google
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

@@ -4,9 +4,8 @@
     "slug": "Texty",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/texty-icon-iOS-Default-1024x1024@1x.png",
     "scheme": "texty",
-    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
@@ -14,7 +13,9 @@
       "associatedDomains": [
         "applinks:relative-fly-62.clerk.accounts.dev",
         "webcredentials:relative-fly-62.clerk.accounts.dev"
-      ]
+      ],
+      "icon": "./assets/texty-icon-iOS-Default-1024x1024@1x.png",
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {

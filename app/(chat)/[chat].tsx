@@ -1,8 +1,10 @@
 import { Button } from "@/components/Button";
 import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
+import { useUserRole } from "@/hooks/useUserRole";
 import { appwriteConfig, client, db, ID } from "@/utils/appwrite";
-import { Gray, Primary, Secondary } from "@/utils/colors";
+import { Gold, Gray, Primary, Purple, Secondary } from "@/utils/colors";
+import { getUserRoleByEmail } from "@/utils/roles";
 import { ChatRoom, Message } from "@/utils/types";
 import { useUser } from "@clerk/clerk-expo";
 import { LegendList } from "@legendapp/list";
@@ -11,6 +13,7 @@ import * as Haptics from "expo-haptics";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -25,9 +28,14 @@ export default function Chat() {
   const { chat: chatId } = useLocalSearchParams();
   const { user } = useUser();
   const router = useRouter();
+  const userRole = useUserRole();
+  const canModerate = userRole === "admin" || userRole === "editor";
   const [messageContent, setMessageContent] = React.useState("");
   const [chatRoom, setChatRoom] = React.useState<any>(null);
   const [messages, setMessages] = React.useState<Message[]>([]);
+  const [showDeleteForMessage, setShowDeleteForMessage] = React.useState<
+    string | null
+  >(null);
   const headerHeightValue = useHeaderHeight();
   const headerHeight = Platform.OS === "ios" ? headerHeightValue : 0;
   const listRef = React.useRef<any>(null);
@@ -111,6 +119,7 @@ export default function Chat() {
         senderId: user?.id,
         senderName: user?.fullName,
         senderPhoto: user?.imageUrl,
+        senderEmail: user?.emailAddresses[0]?.emailAddress,
         chatRoomId: chatId,
       };
 
@@ -136,6 +145,91 @@ export default function Chat() {
     }
   };
 
+  const deleteMessage = async (messageId: string) => {
+    try {
+      await db.deleteDocument(
+        appwriteConfig.db,
+        appwriteConfig.col.messages,
+        messageId
+      );
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    } catch (e) {
+      console.error("❌ Error deleting message:", e);
+      Alert.alert("Error", "Failed to delete message");
+    }
+  };
+
+  const handleDeleteMessage = (messageId: string, messageContent: string) => {
+    Alert.alert(
+      "Delete Message",
+      `Are you sure you want to delete this message?\n\n"${messageContent.slice(
+        0,
+        50
+      )}${messageContent.length > 50 ? "..." : ""}"`,
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => deleteMessage(messageId),
+        },
+      ]
+    );
+  };
+
+  const deleteChatRoom = async () => {
+    try {
+      // Delete all messages in the chat room first
+      const { documents } = await db.listDocuments(
+        appwriteConfig.db,
+        appwriteConfig.col.messages,
+        [Query.equal("chatRoomId", chatId as string)]
+      );
+
+      for (const message of documents) {
+        await db.deleteDocument(
+          appwriteConfig.db,
+          appwriteConfig.col.messages,
+          message.$id
+        );
+      }
+
+      // Delete the chat room
+      await db.deleteDocument(
+        appwriteConfig.db,
+        appwriteConfig.col.chatrooms,
+        chatId as string
+      );
+
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      router.back();
+    } catch (e) {
+      console.error("❌ Error deleting chat room:", e);
+      Alert.alert("Error", "Failed to delete chat room");
+    }
+  };
+
+  const handleDeleteChatRoom = () => {
+    Alert.alert(
+      "Delete Chat Room",
+      `Are you sure you want to delete "${chatRoom?.title}"? This will delete all messages in this room and cannot be undone.`,
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => deleteChatRoom(),
+        },
+      ]
+    );
+  };
+
   if (!chatId) {
     return <Text>We not found this room</Text>;
   }
@@ -145,6 +239,19 @@ export default function Chat() {
       <Stack.Screen
         options={{
           title: chatRoom?.title || "Chat Room",
+          headerRight: canModerate
+            ? () => (
+                <Pressable
+                  onPress={handleDeleteChatRoom}
+                  style={({ pressed }) => ({
+                    padding: 8,
+                    opacity: pressed ? 0.5 : 1,
+                  })}
+                >
+                  <IconSymbol name="trash.fill" size={22} color="#FF3B30" />
+                </Pressable>
+              )
+            : undefined,
           headerLeft: () => (
             <Button
               title="Chat Rooms"
@@ -167,8 +274,17 @@ export default function Chat() {
           <LegendList
             ref={listRef}
             data={messages}
+            extraData={showDeleteForMessage}
             renderItem={({ item }) => {
               const isSender = item.senderId === user?.id;
+              const senderRole = getUserRoleByEmail(item.senderEmail);
+              const showRoleBadge =
+                senderRole === "admin" || senderRole === "editor";
+              const roleBadgeColor = senderRole === "admin" ? Gold : Purple;
+              const roleBadgeIcon =
+                senderRole === "admin" ? "crown.fill" : "pencil";
+              const roleBadgeText = senderRole === "admin" ? "Admin" : "Editor";
+
               return (
                 <View
                   style={{
@@ -188,16 +304,14 @@ export default function Chat() {
                       alignSelf: isSender ? "flex-end" : "flex-start",
                     }}
                   >
-                    {!isSender && (
-                      <Image
-                        source={{ uri: item.senderPhoto }}
-                        style={{
-                          width: 24,
-                          height: 24,
-                          borderRadius: 12,
-                        }}
-                      />
-                    )}
+                    <Image
+                      source={{ uri: item.senderPhoto }}
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: 12,
+                      }}
+                    />
                     <Text
                       style={{
                         fontSize: 12,
@@ -208,62 +322,149 @@ export default function Chat() {
                     >
                       {item.senderName}
                     </Text>
-                    {isSender && (
-                      <Image
-                        source={{ uri: item.senderPhoto }}
+                    {showRoleBadge && (
+                      <View
                         style={{
-                          width: 24,
-                          height: 24,
-                          borderRadius: 12,
+                          paddingHorizontal: 8,
+                          paddingVertical: 3,
+                          borderRadius: 10,
+                          backgroundColor: `${roleBadgeColor}18`,
+                          borderWidth: 1.5,
+                          borderColor: `${roleBadgeColor}55`,
+                          flexDirection: "row",
+                          alignItems: "center",
+                          gap: 4,
                         }}
-                      />
+                      >
+                        <IconSymbol
+                          name={roleBadgeIcon}
+                          size={11}
+                          color={roleBadgeColor}
+                        />
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            fontWeight: "600",
+                            color: roleBadgeColor,
+                            letterSpacing: 0.5,
+                          }}
+                        >
+                          {roleBadgeText}
+                        </Text>
+                      </View>
                     )}
                   </View>
 
-                  {/* Message bubble */}
-                  <View
-                    style={{
-                      backgroundColor: isSender ? Primary : Secondary,
-                      paddingHorizontal: 16,
-                      paddingVertical: 12,
-                      borderRadius: 20,
-                      borderBottomRightRadius: isSender ? 4 : 20,
-                      borderBottomLeftRadius: isSender ? 20 : 4,
-                      borderWidth: 1,
-                      borderColor: isSender
-                        ? "rgba(255, 255, 255, 0.2)"
-                        : "rgba(255, 255, 255, 0.15)",
-                      shadowColor: "#000",
-                      shadowOffset: { width: 0, height: 3 },
-                      shadowOpacity: 0.25,
-                      shadowRadius: 6,
-                      elevation: 4,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        lineHeight: 20,
-                        color: "white",
+                  {/* Message bubble with long-press delete */}
+                  <View>
+                    <Pressable
+                      onLongPress={() => {
+                        if (canModerate) {
+                          console.log(
+                            "Long press detected, showing delete for:",
+                            item.$id
+                          );
+                          Haptics.impactAsync(
+                            Haptics.ImpactFeedbackStyle.Medium
+                          );
+                          setShowDeleteForMessage(item.$id!);
+                        } else {
+                          console.log(
+                            "User cannot moderate, canModerate:",
+                            canModerate
+                          );
+                        }
                       }}
+                      delayLongPress={1000}
                     >
-                      {item.content}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 10,
-                        color: "rgba(255, 255, 255, 0.6)",
-                        marginTop: 6,
-                        alignSelf: "flex-end",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {new Date(item.$createdAt!).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                    </Text>
+                      <View
+                        style={{
+                          backgroundColor: isSender ? Primary : Secondary,
+                          paddingHorizontal: 16,
+                          paddingVertical: 12,
+                          borderRadius: 20,
+                          borderBottomRightRadius: isSender ? 4 : 20,
+                          borderBottomLeftRadius: isSender ? 20 : 4,
+                          borderWidth: 1,
+                          borderColor: isSender
+                            ? "rgba(255, 255, 255, 0.2)"
+                            : "rgba(255, 255, 255, 0.15)",
+                          shadowColor: "#000",
+                          shadowOffset: { width: 0, height: 3 },
+                          shadowOpacity: 0.25,
+                          shadowRadius: 6,
+                          elevation: 4,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontSize: 15,
+                            lineHeight: 20,
+                            color: "white",
+                          }}
+                        >
+                          {item.content}
+                        </Text>
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            color: "rgba(255, 255, 255, 0.6)",
+                            marginTop: 6,
+                            alignSelf: "flex-end",
+                            fontWeight: "500",
+                          }}
+                        >
+                          {new Date(item.$createdAt!).toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true,
+                          })}
+                        </Text>
+                      </View>
+                    </Pressable>
+
+                    {/* Compact delete action - slides down on long press */}
+                    {showDeleteForMessage === item.$id && (
+                      <Pressable
+                        onPress={() => {
+                          console.log("Delete button pressed for:", item.$id);
+                          setShowDeleteForMessage(null);
+                          handleDeleteMessage(item.$id!, item.content);
+                        }}
+                        style={({ pressed }) => ({
+                          marginTop: 6,
+                          alignSelf: isSender ? "flex-end" : "flex-start",
+                          backgroundColor: pressed
+                            ? "rgba(255, 59, 48, 0.18)"
+                            : "rgba(255, 59, 48, 0.12)",
+                          borderRadius: 12,
+                          borderWidth: 1,
+                          borderColor: pressed
+                            ? "rgba(255, 59, 48, 0.4)"
+                            : "rgba(255, 59, 48, 0.3)",
+                          paddingHorizontal: 12,
+                          paddingVertical: 6,
+                          flexDirection: "row",
+                          alignItems: "center",
+                          gap: 6,
+                        })}
+                      >
+                        <IconSymbol
+                          name="trash.fill"
+                          size={13}
+                          color="#FF3B30"
+                        />
+                        <Text
+                          style={{
+                            fontSize: 12,
+                            fontWeight: "600",
+                            color: "#FF3B30",
+                          }}
+                        >
+                          Delete
+                        </Text>
+                      </Pressable>
+                    )}
                   </View>
                 </View>
               );

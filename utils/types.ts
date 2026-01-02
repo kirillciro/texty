@@ -26,6 +26,7 @@ interface Message {
   senderId: string;
   senderName: string;
   senderPhoto: string;
+  senderEmail: string;
   chatRoomId: string;
 }
 
@@ -36,4 +37,10 @@ interface User {
   imageUrl: string;
 }
 
-export type { ChatRoom, Message, User };
+type UserRole = "user" | "editor" | "admin";
+
+interface UserMetadata {
+  role?: UserRole;
+}
+
+export type { ChatRoom, Message, User, UserMetadata, UserRole };
