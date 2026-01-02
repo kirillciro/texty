@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Witamy w Texty, twoich pokojach czatu na wynos.",
+    "signInPasskeys": "Zaloguj się za pomocą Passkeys",
+    "continueApple": "Kontynuuj z Apple",
+    "continueGoogle": "Kontynuuj z Google",
+    "signInWithPasskeys": "Zaloguj się za pomocą Passkeys",
+    "continueWithApple": "Kontynuuj z Apple",
+    "continueWithGoogle": "Kontynuuj z Google"
+  },
+  "chatRooms": {
+    "title": "Pokoje czatu",
+    "noRooms": "Jeszcze nie ma pokoi"
+  },
+  "chat": {
+    "typeMessage": "Wpisz wiadomość...",
+    "deleteMessage": "Usuń wiadomość",
+    "deleteConfirm": "Czy na pewno chcesz usunąć tę wiadomość?",
+    "deleteChatRoom": "Usuń pokój",
+    "deleteChatRoomConfirm": "Czy na pewno chcesz usunąć ten pokój? Wszystkie wiadomości zostaną usunięte i nie można tego cofnąć.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nowy pokój",
+    "roomName": "Nazwa pokoju",
+    "roomDescription": "Opis pokoju",
+    "create": "Utwórz"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Język",
+    "logout": "Wyloguj",
+    "changePhoto": "Zmień zdjęcie",
+    "passkeys": "Passkeys",
+    "actions": "Działania",
+    "settings": "Ustawienia",
+    "role": "Rola",
+    "administrator": "Administrator",
+    "editor": "Redaktor",
+    "user": "Użytkownik",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Wyloguj"
+  },
+  "common": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "back": "Wstecz",
+    "yes": "Tak",
+    "no": "Nie",
+    "error": "Błąd",
+    "success": "Sukces"
+  }
+}

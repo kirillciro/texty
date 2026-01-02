@@ -1,88 +1,28 @@
 import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
 import { useUserRole } from "@/hooks/useUserRole";
-import i18n, { getCurrentLanguage, setLanguage } from "@/localization/i18n";
-import { saveLanguage } from "@/localization/languageStorage";
 import { Gold, Gray, Primary, Purple } from "@/utils/colors";
 import { UserRole } from "@/utils/types";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import * as FileSystem from "expo-file-system/legacy";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
+import { Alert, Image, ScrollView, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
-import {
-  Alert,
-  Image,
-  Modal,
-  NativeModules,
-  Platform,
-  Pressable,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
-
-const LANGUAGES = [
-  { code: "en", label: "English", flag: "🌐" },
-  { code: "de", label: "Deutsch", flag: "🇩🇪" },
-  { code: "fr", label: "Français", flag: "🇫🇷" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "it", label: "Italiano", flag: "🇮🇹" },
-  { code: "pt", label: "Português", flag: "🇵🇹" },
-  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
-  { code: "pl", label: "Polski", flag: "🇵🇱" },
-  { code: "sv", label: "Svenska", flag: "🇸🇪" },
-  { code: "no", label: "Norsk", flag: "🇳🇴" },
-  { code: "da", label: "Dansk", flag: "🇩🇰" },
-  { code: "fi", label: "Suomi", flag: "🇫🇮" },
-  { code: "cs", label: "Čeština", flag: "🇨🇿" },
-  { code: "ro", label: "Română", flag: "🇷🇴" },
-  { code: "el", label: "Ελληνικά", flag: "🇬🇷" },
-  { code: "hu", label: "Magyar", flag: "🇭🇺" },
-  { code: "tr", label: "Türkçe", flag: "🇹🇷" },
-  { code: "et", label: "Eesti", flag: "🇪🇪" },
-  { code: "ru", label: "Русский", flag: "🇷🇺" },
-  { code: "uk", label: "Українська", flag: "🇺🇦" },
-];
-
-const getSystemLanguage = (): string => {
-  if (Platform.OS === "web") {
-    const browserLang = navigator.language.split("-")[0];
-    return LANGUAGES.find((l) => l.code === browserLang)?.code || "en";
-  } else if (Platform.OS === "ios") {
-    const locale =
-      NativeModules.SettingsManager?.settings?.AppleLocale ||
-      NativeModules.SettingsManager?.settings?.AppleLanguages?.[0];
-    const langCode = locale?.split("_")[0] || "en";
-    return LANGUAGES.find((l) => l.code === langCode)?.code || "en";
-  } else {
-    const locale = NativeModules.I18nManager?.localeIdentifier;
-    const langCode = locale?.split("_")[0] || "en";
-    return LANGUAGES.find((l) => l.code === langCode)?.code || "en";
-  }
-};
+import i18n, { getCurrentLanguage, setLanguage } from "@/localization/i18n";
+import { saveLanguage } from "@/localization/languageStorage";
 
 export default function Profile() {
   const { user } = useUser();
   const { signOut } = useAuth();
   const passkeys = user?.passkeys ?? [];
   const userRole = useUserRole();
-  const [showLanguageModal, setShowLanguageModal] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState(getCurrentLanguage());
 
   const handleLanguageChange = async (lang: string) => {
-    if (lang === "en") {
-      const systemLang = getSystemLanguage();
-      const targetLang = systemLang !== "en" ? systemLang : "en";
-      setLanguage(targetLang);
-      await saveLanguage(targetLang);
-      setCurrentLanguage(targetLang);
-    } else {
-      setLanguage(lang);
-      await saveLanguage(lang);
-      setCurrentLanguage(lang);
-    }
-    setShowLanguageModal(false);
+    setLanguage(lang);
+    await saveLanguage(lang);
+    setCurrentLanguage(lang);
   };
 
   const handleSignOut = async () => {
@@ -293,7 +233,100 @@ export default function Profile() {
                 color: getRoleColor(userRole),
                 letterSpacing: 0.5,
               }}
+          Language Card */}
+      <View
+        style={{
+          backgroundColor: "rgba(26, 26, 26, 0.6)",
+          borderRadius: 24,
+          padding: 20,
+          marginBottom: 20,
+          borderWidth: 1,
+          borderColor: "rgba(255, 255, 255, 0.1)",
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "700",
+            marginBottom: 16,
+            letterSpacing: 0.3,
+          }}
+        >
+          {i18n.t("profile.language")}
+        </Text>
+
+        <View style={{ gap: 10 }}>
+          {[
+            { code: "en", label: "English", flag: "🇬🇧" },
+            { code: "de", label: "Deutsch", flag: "🇩🇪" },
+            { code: "fr", label: "Français", flag: "🇫🇷" },
+            { code: "es", label: "Español", flag: "🇪🇸" },
+            { code: "it", label: "Italiano", flag: "🇮🇹" },
+            { code: "pt", label: "Português", flag: "🇵🇹" },
+            { code: "nl", label: "Nederlands", flag: "🇳🇱" },
+            { code: "pl", label: "Polski", flag: "🇵🇱" },
+            { code: "sv", label: "Svenska", flag: "🇸🇪" },
+            { code: "no", label: "Norsk", flag: "🇳🇴" },
+            { code: "da", label: "Dansk", flag: "🇩🇰" },
+            { code: "fi", label: "Suomi", flag: "🇫🇮" },
+            { code: "cs", label: "Čeština", flag: "🇨🇿" },
+            { code: "ro", label: "Română", flag: "🇷🇴" },
+            { code: "el", label: "Ελληνικά", flag: "🇬🇷" },
+            { code: "hu", label: "Magyar", flag: "🇭🇺" },
+            { code: "tr", label: "Türkçe", flag: "🇹🇷" },
+            { code: "et", label: "Eesti", flag: "🇪🇪" },
+            { code: "ru", label: "Русский", flag: "🇷🇺" },
+            { code: "uk", label: "Українська", flag: "🇺🇦" },
+          ].map((lang) => (
+            <TouchableOpacity
+              key={lang.code}
+              onPress={() => handleLanguageChange(lang.code)}
+              style={{
+                paddingVertical: 14,
+                paddingHorizontal: 16,
+                borderRadius: 16,
+                backgroundColor:
+                  currentLanguage === lang.code
+                    ? "rgba(0, 122, 255, 0.2)"
+                    : "rgba(255, 255, 255, 0.05)",
+                borderWidth: 1.5,
+                borderColor:
+                  currentLanguage === lang.code
+                    ? Primary
+                    : "rgba(255, 255, 255, 0.1)",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 12,
+              }}
             >
+              <Text style={{ fontSize: 24 }}>{lang.flag}</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: currentLanguage === lang.code ? "700" : "500",
+                  color:
+                    currentLanguage === lang.code
+                      ? Primary
+                      : "rgba(255, 255, 255, 0.9)",
+                  letterSpacing: 0.3,
+                }}
+              >
+                {lang.label}
+              </Text>
+              {currentLanguage === lang.code && (
+                <IconSymbol
+          {i18n.t("profile.passkeys")}name="checkmark.circle.fill"
+                  size={20}
+                  color={Primary}
+                  style={{ marginLeft: "auto" }}
+                />
+              )}
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+
+      {/*   >
               {getRoleLabel(userRole).toUpperCase()}
             </Text>
           </View>
@@ -312,48 +345,6 @@ export default function Profile() {
           overflow: "hidden",
         }}
       >
-        {/* Language Selector */}
-        <TouchableOpacity
-          onPress={() => setShowLanguageModal(true)}
-          style={{
-            paddingVertical: 14,
-            paddingHorizontal: 16,
-            borderRadius: 16,
-            backgroundColor: "rgba(0, 122, 255, 0.15)",
-            borderWidth: 1,
-            borderColor: "rgba(0, 122, 255, 0.3)",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: 12,
-          }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-            <Text style={{ fontSize: 24 }}>
-              {LANGUAGES.find((l) => l.code === currentLanguage)?.flag}
-            </Text>
-            <Text
-              style={{
-                color: Primary,
-                fontSize: 16,
-                fontWeight: "700",
-                letterSpacing: 0.3,
-              }}
-            >
-              {i18n.t("profile.language")}
-            </Text>
-          </View>
-          <Text
-            style={{
-              color: "rgba(255, 255, 255, 0.6)",
-              fontSize: 14,
-              fontWeight: "600",
-            }}
-          >
-            {LANGUAGES.find((l) => l.code === currentLanguage)?.label}
-          </Text>
-        </TouchableOpacity>
-
         <TouchableOpacity
           onPress={handleSignOut}
           style={{
@@ -377,7 +368,7 @@ export default function Profile() {
               letterSpacing: 0.3,
             }}
           >
-            {i18n.t("profile.signOut")}
+            Sign Out
           </Text>
         </TouchableOpacity>
       </View>
@@ -400,7 +391,7 @@ export default function Profile() {
             letterSpacing: 0.3,
           }}
         >
-          {i18n.t("profile.passkeys")}
+          Passkeys
         </Text>
 
         {passkeys.length === 0 ? (
@@ -421,7 +412,7 @@ export default function Profile() {
                 fontWeight: "500",
               }}
             >
-              {i18n.t("profile.noPasskeys")}
+              No passkeys registered
             </Text>
           </View>
         ) : (
@@ -449,10 +440,10 @@ export default function Profile() {
                   marginBottom: 4,
                 }}
               >
-                {i18n.t("profile.created")}: {passkey.createdAt.toLocaleDateString()}
+                Created: {passkey.createdAt.toLocaleDateString()}
               </Text>
               <Text style={{ color: "rgba(255, 255, 255, 0.5)", fontSize: 12 }}>
-                {i18n.t("profile.lastUsed")}: {passkey.lastUsedAt?.toLocaleDateString() || i18n.t("profile.never")}
+                Last used: {passkey.lastUsedAt?.toLocaleDateString() || "Never"}
               </Text>
               <TouchableOpacity
                 onPress={async () => {
@@ -487,7 +478,7 @@ export default function Profile() {
                     fontWeight: "600",
                   }}
                 >
-                  {i18n.t("profile.deletePasskey")}
+                  Delete Passkey
                 </Text>
               </TouchableOpacity>
             </View>
@@ -497,12 +488,12 @@ export default function Profile() {
         <TouchableOpacity
           onPress={async () => {
             try {
-              await user?.createPasskey();
-              await user?.reload();
-              Alert.alert(i18n.t("common.success"), i18n.t("profile.passkeyCreated"));
-            } catch (error: any) {
-              console.error("Error creating passkey:", error);
-
+             i18n.t("profile.administrator");
+    case "editor":
+      return i18n.t("profile.editor");
+    case "user":
+    default:
+      return i18n.t("profile.user")
               if (
                 error?.errors?.[0]?.code === "passkey_registration_cancelled"
               ) {
@@ -510,9 +501,9 @@ export default function Profile() {
               }
 
               Alert.alert(
-                i18n.t("common.error"),
+                "Error",
                 error?.errors?.[0]?.message ||
-                  i18n.t("profile.passkeyCreateError")
+                  "Failed to create passkey. Please try again."
               );
             }
           }}
@@ -537,101 +528,10 @@ export default function Profile() {
               letterSpacing: 0.3,
             }}
           >
-            {i18n.t("profile.addNewPasskey")}
+            Add New Passkey
           </Text>
         </TouchableOpacity>
       </View>
-
-      {/* Language Selection Modal */}
-      <Modal
-        visible={showLanguageModal}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setShowLanguageModal(false)}
-      >
-        <Pressable
-          style={{
-            flex: 1,
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          onPress={() => setShowLanguageModal(false)}
-        >
-          <Pressable
-            style={{
-              width: "85%",
-              maxHeight: "70%",
-              backgroundColor: "rgba(28, 28, 30, 0.98)",
-              borderRadius: 28,
-              padding: 24,
-              borderWidth: 1,
-              borderColor: "rgba(255, 255, 255, 0.1)",
-            }}
-            onPress={(e) => e.stopPropagation()}
-          >
-            <Text
-              style={{
-                fontSize: 24,
-                fontWeight: "700",
-                marginBottom: 20,
-                textAlign: "center",
-                letterSpacing: 0.3,
-              }}
-            >
-              {i18n.t("profile.selectLanguage")}
-            </Text>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {LANGUAGES.map((language) => (
-                <TouchableOpacity
-                  key={language.code}
-                  onPress={() => handleLanguageChange(language.code)}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    paddingVertical: 16,
-                    paddingHorizontal: 16,
-                    borderRadius: 16,
-                    marginBottom: 8,
-                    backgroundColor:
-                      currentLanguage === language.code
-                        ? "rgba(0, 122, 255, 0.15)"
-                        : "rgba(255, 255, 255, 0.05)",
-                    borderWidth: 1,
-                    borderColor:
-                      currentLanguage === language.code
-                        ? "rgba(0, 122, 255, 0.3)"
-                        : "rgba(255, 255, 255, 0.08)",
-                  }}
-                >
-                  <View
-                    style={{ flexDirection: "row", alignItems: "center", gap: 12 }}
-                  >
-                    <Text style={{ fontSize: 28 }}>{language.flag}</Text>
-                    <Text
-                      style={{
-                        fontSize: 17,
-                        fontWeight:
-                          currentLanguage === language.code ? "700" : "600",
-                        color:
-                          currentLanguage === language.code
-                            ? Primary
-                            : "rgba(255, 255, 255, 0.9)",
-                      }}
-                    >
-                      {language.label}
-                    </Text>
-                  </View>
-                  {currentLanguage === language.code && (
-                    <IconSymbol name="checkmark" size={20} color={Primary} />
-                  )}
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </Pressable>
-        </Pressable>
-      </Modal>
     </ScrollView>
   );
 }
@@ -664,11 +564,11 @@ function getRoleIcon(role: UserRole): any {
 function getRoleLabel(role: UserRole): string {
   switch (role) {
     case "admin":
-      return i18n.t("profile.administrator");
+      return "Administrator";
     case "editor":
-      return i18n.t("profile.editor");
+      return "Editor";
     case "user":
     default:
-      return i18n.t("profile.user");
+      return "User";
   }
 }

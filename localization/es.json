@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Bienvenido a Texty, tus salas de chat para llevar.",
+    "signInPasskeys": "Iniciar sesión con Passkeys",
+    "continueApple": "Continuar con Apple",
+    "continueGoogle": "Continuar con Google",
+    "signInWithPasskeys": "Iniciar sesión con Passkeys",
+    "continueWithApple": "Continuar con Apple",
+    "continueWithGoogle": "Continuar con Google"
+  },
+  "chatRooms": {
+    "title": "Salas de chat",
+    "noRooms": "Aún no hay salas"
+  },
+  "chat": {
+    "typeMessage": "Escribe un mensaje...",
+    "deleteMessage": "Eliminar mensaje",
+    "deleteConfirm": "¿Estás seguro de que quieres eliminar este mensaje?",
+    "deleteChatRoom": "Eliminar sala",
+    "deleteChatRoomConfirm": "¿Estás seguro de que quieres eliminar esta sala? Todos los mensajes serán eliminados y no se puede deshacer.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nueva sala",
+    "roomName": "Nombre de la sala",
+    "roomDescription": "Descripción de la sala",
+    "create": "Crear"
+  },
+  "profile": {
+    "title": "Perfil",
+    "language": "Idioma",
+    "logout": "Cerrar sesión",
+    "changePhoto": "Cambiar foto",
+    "passkeys": "Passkeys",
+    "actions": "Acciones",
+    "settings": "Ajustes",
+    "role": "Rol",
+    "administrator": "Administrador",
+    "editor": "Editor",
+    "user": "Usuario",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Cerrar sesión"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Atrás",
+    "yes": "Sí",
+    "no": "No",
+    "error": "Error",
+    "success": "Éxito"
+  }
+}

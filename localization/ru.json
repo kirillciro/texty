@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Добро пожаловать в Texty, ваши чат-комнаты всегда с вами.",
+    "signInPasskeys": "Войти с Passkeys",
+    "continueApple": "Продолжить с Apple",
+    "continueGoogle": "Продолжить с Google",
+    "signInWithPasskeys": "Войти с Passkeys",
+    "continueWithApple": "Продолжить с Apple",
+    "continueWithGoogle": "Продолжить с Google"
+  },
+  "chatRooms": {
+    "title": "Чат-комнаты",
+    "noRooms": "Пока нет чат-комнат"
+  },
+  "chat": {
+    "typeMessage": "Напишите сообщение...",
+    "deleteMessage": "Удалить сообщение",
+    "deleteConfirm": "Вы уверены, что хотите удалить это сообщение?",
+    "deleteChatRoom": "Удалить чат-комнату",
+    "deleteChatRoomConfirm": "Вы уверены, что хотите удалить эту чат-комнату? Все сообщения будут удалены, это действие нельзя отменить.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Новая комната",
+    "roomName": "Название комнаты",
+    "roomDescription": "Описание комнаты",
+    "create": "Создать"
+  },
+  "profile": {
+    "title": "Профиль",
+    "language": "Язык",
+    "logout": "Выйти",
+    "changePhoto": "Изменить фото",
+    "passkeys": "Ключи доступа",
+    "actions": "Действия",
+    "settings": "Настройки",
+    "role": "Роль",
+    "administrator": "Администратор",
+    "editor": "Редактор",
+    "user": "Пользователь",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Выйти"
+  },
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Изменить",
+    "back": "Назад",
+    "yes": "Да",
+    "no": "Нет",
+    "error": "Ошибка",
+    "success": "Успех"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Velkommen til Texty, dine chatrum på farten.",
+    "signInPasskeys": "Log ind med Passkeys",
+    "continueApple": "Fortsæt med Apple",
+    "continueGoogle": "Fortsæt med Google",
+    "signInWithPasskeys": "Log ind med Passkeys",
+    "continueWithApple": "Fortsæt med Apple",
+    "continueWithGoogle": "Fortsæt med Google"
+  },
+  "chatRooms": {
+    "title": "Chatrum",
+    "noRooms": "Ingen chatrum endnu"
+  },
+  "chat": {
+    "typeMessage": "Skriv en besked...",
+    "deleteMessage": "Slet besked",
+    "deleteConfirm": "Er du sikker på, at du vil slette denne besked?",
+    "deleteChatRoom": "Slet chatrum",
+    "deleteChatRoomConfirm": "Er du sikker på, at du vil slette dette chatrum? Alle beskeder vil blive slettet, og dette kan ikke fortrydes.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nyt rum",
+    "roomName": "Rumnavn",
+    "roomDescription": "Rumbeskrivelse",
+    "create": "Opret"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Sprog",
+    "logout": "Log ud",
+    "changePhoto": "Skift billede",
+    "passkeys": "Passkeys",
+    "actions": "Handlinger",
+    "settings": "Indstillinger",
+    "role": "Rolle",
+    "administrator": "Administrator",
+    "editor": "Redaktør",
+    "user": "Bruger",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Log ud"
+  },
+  "common": {
+    "save": "Gem",
+    "cancel": "Annuller",
+    "delete": "Slet",
+    "edit": "Rediger",
+    "back": "Tilbage",
+    "yes": "Ja",
+    "no": "Nej",
+    "error": "Fejl",
+    "success": "Succes"
+  }
+}

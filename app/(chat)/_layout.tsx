@@ -3,6 +3,7 @@ import { Link, Redirect, Stack } from "expo-router";
 
 import { IconSymbol } from "@/components/icon-symbol";
 import { useUserRole } from "@/hooks/useUserRole";
+import i18n from "@/localization/i18n";
 import { Gold, Primary, Purple } from "@/utils/colors";
 import { Image, View } from "react-native";
 
@@ -20,7 +21,7 @@ export default function RootLayout() {
         name="index"
         options={{
           headerLargeTitle: true,
-          headerTitle: "Chat Rooms",
+          headerTitle: i18n.t("chatRooms.title"),
           headerLeft: (props) => (
             <Link
               style={{
@@ -81,7 +82,7 @@ export default function RootLayout() {
         name="profile"
         options={{
           presentation: "modal",
-          headerTitle: "Profile",
+          headerTitle: i18n.t("profile.title"),
           headerLeft: () => (
             <Link
               style={{
@@ -99,7 +100,7 @@ export default function RootLayout() {
         name="new-room"
         options={{
           presentation: "modal",
-          headerTitle: "New Chat Room",
+          headerTitle: i18n.t("newRoom.title"),
           headerLeft: () => (
             <Link
               style={{
@@ -122,7 +123,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="settings/[chat]"
         options={{
-          headerTitle: "Room Settings",
+          headerTitle: i18n.t("chat.settings"),
           presentation: "modal",
         }}
       />

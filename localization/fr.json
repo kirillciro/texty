@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Bienvenue sur Texty, vos salons de discussion à emporter.",
+    "signInPasskeys": "Se connecter avec Passkeys",
+    "signInWithPasskeys": "Se connecter avec Passkeys",
+    "continueApple": "Continuer avec Apple",
+    "continueWithApple": "Continuer avec Apple",
+    "continueGoogle": "Continuer avec Google",
+    "continueWithGoogle": "Continuer avec Google"
+  },
+  "chatRooms": {
+    "title": "Salons de discussion",
+    "noRooms": "Pas encore de salons"
+  },
+  "chat": {
+    "typeMessage": "Tapez un message...",
+    "deleteMessage": "Supprimer le message",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce message ?",
+    "deleteChatRoom": "Supprimer le salon",
+    "deleteChatRoomConfirm": "Êtes-vous sûr de vouloir supprimer ce salon ? Tous les messages seront supprimés et cette action est irréversible.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nouveau salon",
+    "roomName": "Nom du salon",
+    "roomDescription": "Description du salon",
+    "create": "Créer"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Langue",
+    "selectLanguage": "Sélectionner la langue",
+    "logout": "Se déconnecter",
+    "signOut": "Se déconnecter",
+    "changePhoto": "Changer la photo",
+    "passkeys": "Passkeys",
+    "actions": "Actions",
+    "settings": "Paramètres",
+    "role": "Rôle",
+    "administrator": "Administrateur",
+    "editor": "Éditeur",
+    "user": "Utilisateur",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again."
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour",
+    "yes": "Oui",
+    "no": "Non",
+    "error": "Erreur",
+    "success": "Succès"
+  }
+}

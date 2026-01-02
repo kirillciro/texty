@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Üdvözöljük a Textyben, a hordozható chat szobáiban.",
+    "signInPasskeys": "Bejelentkezés Passkeys-szel",
+    "continueApple": "Folytatás Apple-lel",
+    "continueGoogle": "Folytatás Google-lel",
+    "signInWithPasskeys": "Bejelentkezés Passkeys-szel",
+    "continueWithApple": "Folytatás Apple-lel",
+    "continueWithGoogle": "Folytatás Google-lel"
+  },
+  "chatRooms": {
+    "title": "Chat szobák",
+    "noRooms": "Még nincsenek szobák"
+  },
+  "chat": {
+    "typeMessage": "Írj egy üzenetet...",
+    "deleteMessage": "Üzenet törlése",
+    "deleteConfirm": "Biztosan törölni szeretné ezt az üzenetet?",
+    "deleteChatRoom": "Chat szoba törlése",
+    "deleteChatRoomConfirm": "Biztosan törölni szeretné ezt a chat szobát? Minden üzenet törlésre kerül és ez nem vonható vissza.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Új szoba",
+    "roomName": "Szoba neve",
+    "roomDescription": "Szoba leírása",
+    "create": "Létrehozás"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Nyelv",
+    "logout": "Kijelentkezés",
+    "changePhoto": "Fotó módosítása",
+    "passkeys": "Passkeys",
+    "actions": "Műveletek",
+    "settings": "Beállítások",
+    "role": "Szerep",
+    "administrator": "Adminisztrátor",
+    "editor": "Szerkesztő",
+    "user": "Felhasználó",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Kijelentkezés"
+  },
+  "common": {
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "edit": "Szerkesztés",
+    "back": "Vissza",
+    "yes": "Igen",
+    "no": "Nem",
+    "error": "Hiba",
+    "success": "Siker"
+  }
+}

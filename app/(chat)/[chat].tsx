@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
 import { useUserRole } from "@/hooks/useUserRole";
+import i18n from "@/localization/i18n";
 import { appwriteConfig, client, db, ID } from "@/utils/appwrite";
 import { Gold, Gray, Primary, Purple, Secondary } from "@/utils/colors";
 import { getUserRoleByEmail } from "@/utils/roles";
@@ -156,7 +157,7 @@ export default function Chat() {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (e) {
       console.error("❌ Error deleting message:", e);
-      Alert.alert("Error", "Failed to delete message");
+      Alert.alert(i18n.t("common.error"), i18n.t("chat.deleteMessageError"));
     }
   };
 
@@ -209,21 +210,21 @@ export default function Chat() {
       router.back();
     } catch (e) {
       console.error("❌ Error deleting chat room:", e);
-      Alert.alert("Error", "Failed to delete chat room");
+      Alert.alert(i18n.t("common.error"), i18n.t("chat.deleteChatRoomError"));
     }
   };
 
   const handleDeleteChatRoom = () => {
     Alert.alert(
-      "Delete Chat Room",
-      `Are you sure you want to delete "${chatRoom?.title}"? This will delete all messages in this room and cannot be undone.`,
+      i18n.t("chat.deleteChatRoom"),
+      i18n.t("chat.deleteChatRoomConfirm", { title: chatRoom?.title }),
       [
         {
-          text: "Cancel",
+          text: i18n.t("common.cancel"),
           style: "cancel",
         },
         {
-          text: "Delete",
+          text: i18n.t("common.delete"),
           style: "destructive",
           onPress: () => deleteChatRoom(),
         },
@@ -255,7 +256,7 @@ export default function Chat() {
             : undefined,
           headerLeft: () => (
             <Button
-              title="Chat Rooms"
+              title={i18n.t("chatRooms.title")}
               variant="header"
               icon={
                 <IconSymbol name="chevron.left" color={Primary} size={20} />
@@ -291,7 +292,7 @@ export default function Chat() {
                 const roleBadgeIcon =
                   senderRole === "admin" ? "crown.fill" : "pencil";
                 const roleBadgeText =
-                  senderRole === "admin" ? "Admin" : "Editor";
+                  senderRole === "admin" ? i18n.t("profile.administrator") : i18n.t("profile.editor");
                 const roleBadgeBorderColor =
                   senderRole === "admin"
                     ? "rgba(255, 215, 0, 0.6)"
@@ -473,7 +474,7 @@ export default function Chat() {
                               color: "#FF3B30",
                             }}
                           >
-                            Delete
+                            {i18n.t("common.delete")}
                           </Text>
                         </Pressable>
                       )}
@@ -512,7 +513,7 @@ export default function Chat() {
               }}
             >
               <TextInput
-                placeholder="Type a message..."
+                placeholder={i18n.t("chat.typeMessage")}
                 value={messageContent}
                 onChangeText={setMessageContent}
                 style={{

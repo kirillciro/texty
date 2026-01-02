@@ -1,5 +1,6 @@
 import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
+import i18n from "@/localization/i18n";
 import { isClerkAPIResponseError, useSSO, useSignIn } from "@clerk/clerk-expo";
 import { ClerkAPIError } from "@clerk/types";
 import * as AuthSession from "expo-auth-session";
@@ -139,7 +140,7 @@ export default function Index() {
               paddingHorizontal: 20,
             }}
           >
-            Welcome to Texty, your chat rooms to-go.
+            {i18n.t("auth.welcome")}
           </Text>
 
           {/* Error Messages */}
@@ -205,7 +206,7 @@ export default function Index() {
                 letterSpacing: 0.3,
               }}
             >
-              Sign in with Passkeys
+              {i18n.t("auth.signInWithPasskeys")}
             </Text>
           </TouchableOpacity>
 
@@ -237,7 +238,7 @@ export default function Index() {
                 letterSpacing: 0.3,
               }}
             >
-              Continue with Apple
+              {i18n.t("auth.continueWithApple")}
             </Text>
           </TouchableOpacity>
 
@@ -267,7 +268,7 @@ export default function Index() {
                 letterSpacing: 0.3,
               }}
             >
-              Continue with Google
+              {i18n.t("auth.continueWithGoogle")}
             </Text>
           </TouchableOpacity>
         </View>

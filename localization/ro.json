@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Bun venit la Texty, camerele tale de chat de luat cu tine.",
+    "signInPasskeys": "Conectează-te cu Passkeys",
+    "continueApple": "Continuă cu Apple",
+    "continueGoogle": "Continuă cu Google",
+    "signInWithPasskeys": "Conectează-te cu Passkeys",
+    "continueWithApple": "Continuă cu Apple",
+    "continueWithGoogle": "Continuă cu Google"
+  },
+  "chatRooms": {
+    "title": "Camere de chat",
+    "noRooms": "Încă nu există camere"
+  },
+  "chat": {
+    "typeMessage": "Scrie un mesaj...",
+    "deleteMessage": "Șterge mesajul",
+    "deleteConfirm": "Sigur vrei să ștergi acest mesaj?",
+    "deleteChatRoom": "Șterge camera",
+    "deleteChatRoomConfirm": "Sigur vrei să ștergi această cameră? Toate mesajele vor fi șterse și nu se poate anula.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Cameră nouă",
+    "roomName": "Numele camerei",
+    "roomDescription": "Descrierea camerei",
+    "create": "Creează"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Limbă",
+    "logout": "Deconectare",
+    "changePhoto": "Schimbă poza",
+    "passkeys": "Passkeys",
+    "actions": "Acțiuni",
+    "settings": "Setări",
+    "role": "Rol",
+    "administrator": "Administrator",
+    "editor": "Editor",
+    "user": "Utilizator",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Deconectare"
+  },
+  "common": {
+    "save": "Salvează",
+    "cancel": "Anulează",
+    "delete": "Șterge",
+    "edit": "Editează",
+    "back": "Înapoi",
+    "yes": "Da",
+    "no": "Nu",
+    "error": "Eroare",
+    "success": "Succes"
+  }
+}

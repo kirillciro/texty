@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Texty'ye hoş geldiniz, her zaman yanınızda olan sohbet odalarınız.",
+    "signInPasskeys": "Passkeys ile giriş yap",
+    "continueApple": "Apple ile devam et",
+    "continueGoogle": "Google ile devam et",
+    "signInWithPasskeys": "Passkeys ile giriş yap",
+    "continueWithApple": "Apple ile devam et",
+    "continueWithGoogle": "Google ile devam et"
+  },
+  "chatRooms": {
+    "title": "Sohbet odaları",
+    "noRooms": "Henüz oda yok"
+  },
+  "chat": {
+    "typeMessage": "Bir mesaj yazın...",
+    "deleteMessage": "Mesajı sil",
+    "deleteConfirm": "Bu mesajı silmek istediğinizden emin misiniz?",
+    "deleteChatRoom": "Sohbet odasını sil",
+    "deleteChatRoomConfirm": "Bu sohbet odasını silmek istediğinizden emin misiniz? Tüm mesajlar silinecek ve bu işlem geri alınamaz.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Yeni oda",
+    "roomName": "Oda adı",
+    "roomDescription": "Oda açıklaması",
+    "create": "Oluştur"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Dil",
+    "logout": "Çıkış yap",
+    "changePhoto": "Fotoğrafı değiştir",
+    "passkeys": "Passkeys",
+    "actions": "İşlemler",
+    "settings": "Ayarlar",
+    "role": "Rol",
+    "administrator": "Yönetici",
+    "editor": "Editör",
+    "user": "Kullanıcı",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Çıkış yap"
+  },
+  "common": {
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "back": "Geri",
+    "yes": "Evet",
+    "no": "Hayır",
+    "error": "Hata",
+    "success": "Başarılı"
+  }
+}

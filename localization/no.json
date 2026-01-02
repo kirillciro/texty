@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Velkommen til Texty, dine chatterom på farten.",
+    "signInPasskeys": "Logg inn med Passkeys",
+    "continueApple": "Fortsett med Apple",
+    "continueGoogle": "Fortsett med Google",
+    "signInWithPasskeys": "Logg inn med Passkeys",
+    "continueWithApple": "Fortsett med Apple",
+    "continueWithGoogle": "Fortsett med Google"
+  },
+  "chatRooms": {
+    "title": "Chatterom",
+    "noRooms": "Ingen chatterom ennå"
+  },
+  "chat": {
+    "typeMessage": "Skriv en melding...",
+    "deleteMessage": "Slett melding",
+    "deleteConfirm": "Er du sikker på at du vil slette denne meldingen?",
+    "deleteChatRoom": "Slett chatterom",
+    "deleteChatRoomConfirm": "Er du sikker på at du vil slette dette chatterommet? Alle meldinger vil bli slettet og dette kan ikke angres.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nytt rom",
+    "roomName": "Romnavn",
+    "roomDescription": "Rombeskrivelse",
+    "create": "Opprett"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Språk",
+    "logout": "Logg ut",
+    "changePhoto": "Endre bilde",
+    "passkeys": "Passkeys",
+    "actions": "Handlinger",
+    "settings": "Innstillinger",
+    "role": "Rolle",
+    "administrator": "Administrator",
+    "editor": "Redaktør",
+    "user": "Bruker",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Logg ut"
+  },
+  "common": {
+    "save": "Lagre",
+    "cancel": "Avbryt",
+    "delete": "Slett",
+    "edit": "Rediger",
+    "back": "Tilbake",
+    "yes": "Ja",
+    "no": "Nei",
+    "error": "Feil",
+    "success": "Suksess"
+  }
+}

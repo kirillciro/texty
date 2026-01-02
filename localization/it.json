@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Benvenuto su Texty, le tue chat room sempre con te.",
+    "signInPasskeys": "Accedi con Passkeys",
+    "continueApple": "Continua con Apple",
+    "continueGoogle": "Continua con Google",
+    "signInWithPasskeys": "Accedi con Passkeys",
+    "continueWithApple": "Continua con Apple",
+    "continueWithGoogle": "Continua con Google"
+  },
+  "chatRooms": {
+    "title": "Stanze chat",
+    "noRooms": "Nessuna stanza ancora"
+  },
+  "chat": {
+    "typeMessage": "Scrivi un messaggio...",
+    "deleteMessage": "Elimina messaggio",
+    "deleteConfirm": "Sei sicuro di voler eliminare questo messaggio?",
+    "deleteChatRoom": "Elimina stanza",
+    "deleteChatRoomConfirm": "Sei sicuro di voler eliminare questa stanza? Tutti i messaggi saranno eliminati e non può essere annullato.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nuova stanza",
+    "roomName": "Nome della stanza",
+    "roomDescription": "Descrizione della stanza",
+    "create": "Crea"
+  },
+  "profile": {
+    "title": "Profilo",
+    "language": "Lingua",
+    "logout": "Esci",
+    "changePhoto": "Cambia foto",
+    "passkeys": "Passkeys",
+    "actions": "Azioni",
+    "settings": "Impostazioni",
+    "role": "Ruolo",
+    "administrator": "Amministratore",
+    "editor": "Editore",
+    "user": "Utente",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Esci"
+  },
+  "common": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "back": "Indietro",
+    "yes": "Sì",
+    "no": "No",
+    "error": "Errore",
+    "success": "Successo"
+  }
+}

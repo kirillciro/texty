@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Ласкаво просимо до Texty, ваші чат-кімнати завжди з вами.",
+    "signInPasskeys": "Увійти з Passkeys",
+    "continueApple": "Продовжити з Apple",
+    "continueGoogle": "Продовжити з Google",
+    "signInWithPasskeys": "Увійти з Passkeys",
+    "continueWithApple": "Продовжити з Apple",
+    "continueWithGoogle": "Продовжити з Google"
+  },
+  "chatRooms": {
+    "title": "Чат-кімнати",
+    "noRooms": "Поки немає чат-кімнат"
+  },
+  "chat": {
+    "typeMessage": "Напишіть повідомлення...",
+    "deleteMessage": "Видалити повідомлення",
+    "deleteConfirm": "Ви впевнені, що хочете видалити це повідомлення?",
+    "deleteChatRoom": "Видалити чат-кімнату",
+    "deleteChatRoomConfirm": "Ви впевнені, що хочете видалити цю чат-кімнату? Всі повідомлення будуть видалені, цю дію не можна скасувати.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Нова кімната",
+    "roomName": "Назва кімнати",
+    "roomDescription": "Опис кімнати",
+    "create": "Створити"
+  },
+  "profile": {
+    "title": "Профіль",
+    "language": "Мова",
+    "logout": "Вийти",
+    "changePhoto": "Змінити фото",
+    "passkeys": "Ключі доступу",
+    "actions": "Дії",
+    "settings": "Налаштування",
+    "role": "Роль",
+    "administrator": "Адміністратор",
+    "editor": "Редактор",
+    "user": "Користувач",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Вийти"
+  },
+  "common": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Змінити",
+    "back": "Назад",
+    "yes": "Так",
+    "no": "Ні",
+    "error": "Помилка",
+    "success": "Успіх"
+  }
+}

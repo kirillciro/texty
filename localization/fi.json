@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Tervetuloa Textyyn, keskusteluhuoneesi mukana.",
+    "signInPasskeys": "Kirjaudu Passkeys-avaimilla",
+    "continueApple": "Jatka Applen kanssa",
+    "continueGoogle": "Jatka Googlen kanssa",
+    "signInWithPasskeys": "Kirjaudu Passkeys-avaimilla",
+    "continueWithApple": "Jatka Applen kanssa",
+    "continueWithGoogle": "Jatka Googlen kanssa"
+  },
+  "chatRooms": {
+    "title": "Keskusteluhuoneet",
+    "noRooms": "Ei vielä huoneita"
+  },
+  "chat": {
+    "typeMessage": "Kirjoita viesti...",
+    "deleteMessage": "Poista viesti",
+    "deleteConfirm": "Haluatko varmasti poistaa tämän viestin?",
+    "deleteChatRoom": "Poista keskusteluhuone",
+    "deleteChatRoomConfirm": "Haluatko varmasti poistaa tämän keskusteluhuoneen? Kaikki viestit poistetaan, eikä tätä voi peruuttaa.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Uusi huone",
+    "roomName": "Huoneen nimi",
+    "roomDescription": "Huoneen kuvaus",
+    "create": "Luo"
+  },
+  "profile": {
+    "title": "Profiili",
+    "language": "Kieli",
+    "logout": "Kirjaudu ulos",
+    "changePhoto": "Vaihda kuva",
+    "passkeys": "Passkeys",
+    "actions": "Toiminnot",
+    "settings": "Asetukset",
+    "role": "Rooli",
+    "administrator": "Ylläpitäjä",
+    "editor": "Toimittaja",
+    "user": "Käyttäjä",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Kirjaudu ulos"
+  },
+  "common": {
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "delete": "Poista",
+    "edit": "Muokkaa",
+    "back": "Takaisin",
+    "yes": "Kyllä",
+    "no": "Ei",
+    "error": "Virhe",
+    "success": "Onnistui"
+  }
+}

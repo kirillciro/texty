@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import Input from "@/components/input";
 import { Text } from "@/components/Text";
+import i18n from "@/localization/i18n";
 import { appwriteConfig, db, ID } from "@/utils/appwrite";
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
@@ -40,7 +41,7 @@ export default function NewRoom() {
         options={{
           headerRight: () => (
             <Button
-              title="Create"
+              title={i18n.t("newRoom.create")}
               variant="header"
               disabled={roomName === "" || isLoading}
               onPress={handleCreateRoom}
@@ -48,23 +49,33 @@ export default function NewRoom() {
           ),
         }}
       />
-      <View style={{ flex: 1, padding: 16, gap: 12 }}>
-        <Text>New Room</Text>
-        <Input
-          placeholder="Room Name"
-          value={roomName}
-          onChangeText={setRoomName}
-          maxLength={255}
-        />
-        <Input
-          placeholder="Room Description"
-          value={roomDescription}
-          onChangeText={setRoomDescription}
-          maxLength={1000}
-          style={{ height: 150 }}
-          textAlignVertical="top"
-          multiline
-        />
+      <View style={{ flex: 1, padding: 20, gap: 16 }}>
+        <View
+          style={{
+            backgroundColor: "rgba(26, 26, 26, 0.6)",
+            borderRadius: 20,
+            padding: 20,
+            gap: 16,
+            borderWidth: 1,
+            borderColor: "rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          <Input
+            placeholder={i18n.t("newRoom.roomName")}
+            value={roomName}
+            onChangeText={setRoomName}
+            maxLength={255}
+          />
+          <Input
+            placeholder={i18n.t("newRoom.roomDescription")}
+            value={roomDescription}
+            onChangeText={setRoomDescription}
+            maxLength={1000}
+            style={{ height: 150 }}
+            textAlignVertical="top"
+            multiline
+          />
+        </View>
       </View>
     </>
   );

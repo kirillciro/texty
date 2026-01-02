@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Welkom bij Texty, je chatrooms om mee te nemen.",
+    "signInPasskeys": "Inloggen met Passkeys",
+    "continueApple": "Doorgaan met Apple",
+    "continueGoogle": "Doorgaan met Google",
+    "signInWithPasskeys": "Inloggen met Passkeys",
+    "continueWithApple": "Doorgaan met Apple",
+    "continueWithGoogle": "Doorgaan met Google"
+  },
+  "chatRooms": {
+    "title": "Chatrooms",
+    "noRooms": "Nog geen chatrooms"
+  },
+  "chat": {
+    "typeMessage": "Typ een bericht...",
+    "deleteMessage": "Bericht verwijderen",
+    "deleteConfirm": "Weet je zeker dat je dit bericht wilt verwijderen?",
+    "deleteChatRoom": "Chatroom verwijderen",
+    "deleteChatRoomConfirm": "Weet je zeker dat je deze chatroom wilt verwijderen? Alle berichten worden verwijderd en dit kan niet ongedaan worden gemaakt.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nieuwe kamer",
+    "roomName": "Kamernaam",
+    "roomDescription": "Kamerbeschrijving",
+    "create": "Aanmaken"
+  },
+  "profile": {
+    "title": "Profiel",
+    "language": "Taal",
+    "logout": "Uitloggen",
+    "changePhoto": "Foto wijzigen",
+    "passkeys": "Passkeys",
+    "actions": "Acties",
+    "settings": "Instellingen",
+    "role": "Rol",
+    "administrator": "Beheerder",
+    "editor": "Redacteur",
+    "user": "Gebruiker",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Uitloggen"
+  },
+  "common": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "back": "Terug",
+    "yes": "Ja",
+    "no": "Nee",
+    "error": "Fout",
+    "success": "Succes"
+  }
+}

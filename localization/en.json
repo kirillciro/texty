@@ -1,0 +1,66 @@
+{
+  "auth": {
+    "welcome": "Welcome to Texty, your chat rooms to-go.",
+    "signInPasskeys": "Sign in with Passkeys",
+    "signInWithPasskeys": "Sign in with Passkeys",
+    "continueApple": "Continue with Apple",
+    "continueWithApple": "Continue with Apple",
+    "continueGoogle": "Continue with Google",
+    "continueWithGoogle": "Continue with Google"
+  },
+  "chatRooms": {
+    "title": "Chat Rooms",
+    "noRooms": "No chat rooms yet",
+    "lastActivity": "Last Activity"
+  },
+  "chat": {
+    "typeMessage": "Type a message...",
+    "deleteMessage": "Delete Message",
+    "deleteConfirm": "Are you sure you want to delete this message?",
+    "deleteChatRoom": "Delete Chat Room",
+    "deleteChatRoomConfirm": "Are you sure you want to delete this chat room? This will delete all messages and cannot be undone.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "New Room",
+    "roomName": "Room Name",
+    "roomDescription": "Room Description",
+    "create": "Create"
+  },
+  "profile": {
+    "title": "Profile",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "logout": "Log out",
+    "signOut": "Sign Out",
+    "changePhoto": "Change Photo",
+    "passkeys": "Passkeys",
+    "actions": "Actions",
+    "settings": "Settings",
+    "role": "Role",
+    "administrator": "Administrator",
+    "editor": "Editor",
+    "user": "User",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again."
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "yes": "Yes",
+    "no": "No",
+    "error": "Error",
+    "success": "Success"
+  }
+}

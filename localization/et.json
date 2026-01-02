@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Tere tulemast Texty'sse, sinu vestlusruumid alati kaasas.",
+    "signInPasskeys": "Logi sisse Passkeys'iga",
+    "continueApple": "Jätka Apple'iga",
+    "continueGoogle": "Jätka Google'iga",
+    "signInWithPasskeys": "Logi sisse Passkeys'iga",
+    "continueWithApple": "Jätka Apple'iga",
+    "continueWithGoogle": "Jätka Google'iga"
+  },
+  "chatRooms": {
+    "title": "Vestlusruumid",
+    "noRooms": "Pole veel ruume"
+  },
+  "chat": {
+    "typeMessage": "Kirjuta sõnum...",
+    "deleteMessage": "Kustuta sõnum",
+    "deleteConfirm": "Kas olete kindel, et soovite selle sõnumi kustutada?",
+    "deleteChatRoom": "Kustuta vestlusruum",
+    "deleteChatRoomConfirm": "Kas olete kindel, et soovite selle vestlusruumi kustutada? Kõik sõnumid kustutatakse ja seda ei saa tagasi võtta.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Uus ruum",
+    "roomName": "Ruumi nimi",
+    "roomDescription": "Ruumi kirjeldus",
+    "create": "Loo"
+  },
+  "profile": {
+    "title": "Profiil",
+    "language": "Keel",
+    "logout": "Logi välja",
+    "changePhoto": "Muuda pilti",
+    "passkeys": "Passkeys",
+    "actions": "Tegevused",
+    "settings": "Seaded",
+    "role": "Roll",
+    "administrator": "Administraator",
+    "editor": "Toimetaja",
+    "user": "Kasutaja",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Logi välja"
+  },
+  "common": {
+    "save": "Salvesta",
+    "cancel": "Tühista",
+    "delete": "Kustuta",
+    "edit": "Muuda",
+    "back": "Tagasi",
+    "yes": "Jah",
+    "no": "Ei",
+    "error": "Viga",
+    "success": "Õnnestus"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Καλώς ήρθατε στο Texty, τα δωμάτια συνομιλίας σας παντού.",
+    "signInPasskeys": "Σύνδεση με Passkeys",
+    "continueApple": "Συνέχεια με Apple",
+    "continueGoogle": "Συνέχεια με Google",
+    "signInWithPasskeys": "Σύνδεση με Passkeys",
+    "continueWithApple": "Συνέχεια με Apple",
+    "continueWithGoogle": "Συνέχεια με Google"
+  },
+  "chatRooms": {
+    "title": "Δωμάτια συνομιλίας",
+    "noRooms": "Δεν υπάρχουν ακόμα δωμάτια"
+  },
+  "chat": {
+    "typeMessage": "Γράψτε ένα μήνυμα...",
+    "deleteMessage": "Διαγραφή μηνύματος",
+    "deleteConfirm": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το μήνυμα;",
+    "deleteChatRoom": "Διαγραφή δωματίου",
+    "deleteChatRoomConfirm": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το δωμάτιο; Όλα τα μηνύματα θα διαγραφούν και δεν μπορεί να αναιρεθεί.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Νέο δωμάτιο",
+    "roomName": "Όνομα δωματίου",
+    "roomDescription": "Περιγραφή δωματίου",
+    "create": "Δημιουργία"
+  },
+  "profile": {
+    "title": "Προφίλ",
+    "language": "Γλώσσα",
+    "logout": "Αποσύνδεση",
+    "changePhoto": "Αλλαγή φωτογραφίας",
+    "passkeys": "Passkeys",
+    "actions": "Ενέργειες",
+    "settings": "Ρυθμίσεις",
+    "role": "Ρόλος",
+    "administrator": "Διαχειριστής",
+    "editor": "Συντάκτης",
+    "user": "Χρήστης",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Αποσύνδεση"
+  },
+  "common": {
+    "save": "Αποθήκευση",
+    "cancel": "Ακύρωση",
+    "delete": "Διαγραφή",
+    "edit": "Επεξεργασία",
+    "back": "Πίσω",
+    "yes": "Ναι",
+    "no": "Όχι",
+    "error": "Σφάλμα",
+    "success": "Επιτυχία"
+  }
+}

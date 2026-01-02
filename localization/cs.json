@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Vítejte v Texty, vaše chatovací místnosti s sebou.",
+    "signInPasskeys": "Přihlásit se pomocí Passkeys",
+    "continueApple": "Pokračovat s Apple",
+    "continueGoogle": "Pokračovat s Google",
+    "signInWithPasskeys": "Přihlásit se pomocí Passkeys",
+    "continueWithApple": "Pokračovat s Apple",
+    "continueWithGoogle": "Pokračovat s Google"
+  },
+  "chatRooms": {
+    "title": "Chatovací místnosti",
+    "noRooms": "Zatím žádné místnosti"
+  },
+  "chat": {
+    "typeMessage": "Napište zprávu...",
+    "deleteMessage": "Smazat zprávu",
+    "deleteConfirm": "Opravdu chcete smazat tuto zprávu?",
+    "deleteChatRoom": "Smazat místnost",
+    "deleteChatRoomConfirm": "Opravdu chcete smazat tuto místnost? Všechny zprávy budou smazány a nelze to vrátit zpět.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nová místnost",
+    "roomName": "Název místnosti",
+    "roomDescription": "Popis místnosti",
+    "create": "Vytvořit"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Jazyk",
+    "logout": "Odhlásit se",
+    "changePhoto": "Změnit fotku",
+    "passkeys": "Passkeys",
+    "actions": "Akce",
+    "settings": "Nastavení",
+    "role": "Role",
+    "administrator": "Administrátor",
+    "editor": "Editor",
+    "user": "Uživatel",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Odhlásit se"
+  },
+  "common": {
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "edit": "Upravit",
+    "back": "Zpět",
+    "yes": "Ano",
+    "no": "Ne",
+    "error": "Chyba",
+    "success": "Úspěch"
+  }
+}

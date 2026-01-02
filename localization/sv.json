@@ -1,0 +1,65 @@
+{
+  "auth": {
+    "welcome": "Välkommen till Texty, dina chattrum att ta med sig.",
+    "signInPasskeys": "Logga in med Passkeys",
+    "continueApple": "Fortsätt med Apple",
+    "continueGoogle": "Fortsätt med Google",
+    "signInWithPasskeys": "Logga in med Passkeys",
+    "continueWithApple": "Fortsätt med Apple",
+    "continueWithGoogle": "Fortsätt med Google"
+  },
+  "chatRooms": {
+    "title": "Chattrum",
+    "noRooms": "Inga chattrum än"
+  },
+  "chat": {
+    "typeMessage": "Skriv ett meddelande...",
+    "deleteMessage": "Ta bort meddelande",
+    "deleteConfirm": "Är du säker på att du vill ta bort det här meddelandet?",
+    "deleteChatRoom": "Ta bort chattrum",
+    "deleteChatRoomConfirm": "Är du säker på att du vill ta bort det här chattrummet? Alla meddelanden kommer att tas bort och det kan inte ångras.",
+    "settings": "Room Settings",
+    "deleteMessageError": "Failed to delete message",
+    "deleteChatRoomError": "Failed to delete chat room"
+  },
+  "newRoom": {
+    "title": "Nytt rum",
+    "roomName": "Rumsnamn",
+    "roomDescription": "Rumsbeskrivning",
+    "create": "Skapa"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Språk",
+    "logout": "Logga ut",
+    "changePhoto": "Ändra foto",
+    "passkeys": "Passkeys",
+    "actions": "Åtgärder",
+    "settings": "Inställningar",
+    "role": "Roll",
+    "administrator": "Administratör",
+    "editor": "Redaktör",
+    "user": "Användare",
+    "noPasskeys": "No passkeys registered",
+    "created": "Created",
+    "lastUsed": "Last used",
+    "never": "Never",
+    "deletePasskey": "Delete Passkey",
+    "addNewPasskey": "Add New Passkey",
+    "passkeyCreated": "Passkey created successfully!",
+    "passkeyCreateError": "Failed to create passkey. Please try again.",
+    "selectLanguage": "Select Language",
+    "signOut": "Logga ut"
+  },
+  "common": {
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "delete": "Ta bort",
+    "edit": "Redigera",
+    "back": "Tillbaka",
+    "yes": "Ja",
+    "no": "Nej",
+    "error": "Fel",
+    "success": "Framgång"
+  }
+}

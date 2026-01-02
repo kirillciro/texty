@@ -1,5 +1,6 @@
 import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
+import i18n from "@/localization/i18n";
 import { appwriteConfig, db } from "@/utils/appwrite";
 import { cleanupInactiveChatRooms } from "@/utils/chatroom-cleanup";
 import { Gray } from "@/utils/colors";
@@ -12,6 +13,7 @@ import { Query } from "react-native-appwrite";
 export default function Index() {
   const [chatRooms, setChatRooms] = React.useState<ChatRoom[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [lastActivities, setLastActivities] = React.useState<Record<string, string>>({});
 
   React.useEffect(() => {
     fetchChatRooms();
@@ -38,6 +40,34 @@ export default function Index() {
       console.log("🚀 Fetched chat rooms:", JSON.stringify(documents, null, 2));
       console.log("🍺 Total chat rooms:", total);
       setChatRooms(documents as unknown as ChatRoom[]);
+      
+      // Fetch last activity for each chat room
+      const activities: Record<string, string> = {};
+      for (const room of documents) {
+        const { documents: messages } = await db.listDocuments(
+          appwriteConfig.db,
+          appwriteConfig.col.messages,
+          [
+            Query.equal("chatRoomId", room.$id),
+            Query.orderDesc("$createdAt"),
+            Query.limit(1),
+          ]
+        );
+        
+        if (messages.length > 0) {
+          const lastMessage = messages[0];
+          const date = new Date(lastMessage.$createdAt);
+          const day = date.getDate();
+          const month = date.toLocaleString('en-US', { month: 'short' });
+          const time = date.toLocaleString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: true 
+          });
+          activities[room.$id] = `${day} ${month}. ${time}`;
+        }
+      }
+      setLastActivities(activities);
     } catch (error) {
       console.error("Error fetching chat rooms:", error);
     }
@@ -77,10 +107,11 @@ export default function Index() {
             <View
               style={{
                 flex: 1,
-                alignItems: "flex-end",
+                alignItems: "center",
                 justifyContent: "space-between",
                 flexDirection: "row",
                 padding: 20,
+                gap: 16,
                 borderRadius: 20,
                 width: "100%",
                 backgroundColor: "rgba(26, 26, 26, 0.28)",
@@ -96,6 +127,7 @@ export default function Index() {
               <ItemTitleDescription
                 title={item.title}
                 description={item.description}
+                lastActivity={lastActivities[item.$id]}
               />
 
               <IconSymbol
@@ -132,14 +164,36 @@ function ItemTitle({ title }: { title: string }) {
 function ItemTitleDescription({
   title,
   description,
+  lastActivity,
 }: {
   title: string;
   description: string;
+  lastActivity?: string;
 }) {
   return (
-    <View>
+    <View style={{ flex: 1, gap: 6 }}>
       <ItemTitle title={title} />
-      <Text style={{ fontSize: 14, color: Gray }}>{description}</Text>
+      <Text 
+        style={{ 
+          fontSize: 14, 
+          color: Gray,
+          lineHeight: 18
+        }}
+      >
+        {description}
+      </Text>
+      {lastActivity && (
+        <Text 
+          style={{ 
+            fontSize: 11, 
+            color: "rgba(142, 142, 147, 0.7)",
+            fontWeight: "500",
+            letterSpacing: 0.2
+          }}
+        >
+          {i18n.t("chatRooms.lastActivity")}: {lastActivity}
+        </Text>
+      )}
     </View>
   );
 }
