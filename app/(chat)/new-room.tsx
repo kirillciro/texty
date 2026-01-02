@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import Input from "@/components/input";
 import { Text } from "@/components/Text";
 import { appwriteConfig, db, ID } from "@/utils/appwrite";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
 
@@ -10,6 +10,7 @@ export default function NewRoom() {
   const [roomName, setRoomName] = useState("");
   const [roomDescription, setRoomDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleCreateRoom = async () => {
     try {
@@ -24,7 +25,8 @@ export default function NewRoom() {
         }
       );
       console.log("✅ Room created:", document);
-      // Optionally, navigate back or show a success message
+      // Navigate back to chat rooms list
+      router.back();
     } catch (e) {
       console.error("❌ Error creating room:", e);
     } finally {

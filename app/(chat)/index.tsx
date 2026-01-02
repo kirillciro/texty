@@ -3,9 +3,9 @@ import { Text } from "@/components/Text";
 import { appwriteConfig, db } from "@/utils/appwrite";
 import { Gray } from "@/utils/colors";
 import { ChatRoom } from "@/utils/types";
-import { Link } from "expo-router";
+import { Link, useFocusEffect } from "expo-router";
 import React from "react";
-import { FlatList, RefreshControl, View } from "react-native";
+import { FlatList, ImageBackground, RefreshControl, View } from "react-native";
 import { Query } from "react-native-appwrite";
 
 export default function Index() {
@@ -15,6 +15,13 @@ export default function Index() {
   React.useEffect(() => {
     fetchChatRooms();
   }, []);
+
+  // Refresh chat rooms when screen comes into focus
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchChatRooms();
+    }, [])
+  );
 
   const fetchChatRooms = async () => {
     try {
@@ -43,57 +50,64 @@ export default function Index() {
     }
   };
   return (
-    <FlatList
-      data={chatRooms}
-      keyExtractor={(item) => item.$id}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-      renderItem={({ item }) => (
-        <Link
-          href={{
-            pathname: "/[chat]",
-            params: { chat: item.$id },
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              flexDirection: "row",
-              padding: 20,
-              borderRadius: 20,
-              width: "100%",
-              backgroundColor: "rgba(26, 26, 26, 0.28)",
-              borderWidth: 1,
-              borderColor: "rgba(107, 107, 107, 0.26)",
-              shadowColor: "#161616a6",
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.3,
-              shadowRadius: 12,
-              elevation: 8,
+    <ImageBackground
+      source={require("@/assets/images/texty-bg.png")}
+      style={{ flex: 1 }}
+      imageStyle={{ opacity: 0.03 }}
+      resizeMode="repeat"
+    >
+      <FlatList
+        data={chatRooms}
+        keyExtractor={(item) => item.$id}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        renderItem={({ item }) => (
+          <Link
+            href={{
+              pathname: "/[chat]",
+              params: { chat: item.$id },
             }}
           >
-            <ItemTitleDescription
-              title={item.title}
-              description={item.description}
-            />
-
-            <IconSymbol
+            <View
               style={{
-                alignSelf: "center",
+                flex: 1,
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                padding: 20,
+                borderRadius: 20,
+                width: "100%",
+                backgroundColor: "rgba(26, 26, 26, 0.28)",
+                borderWidth: 1,
+                borderColor: "rgba(107, 107, 107, 0.26)",
+                shadowColor: "#161616a6",
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 12,
+                elevation: 8,
               }}
-              name="chevron.right"
-              size={24}
-              color={Gray}
-            />
-          </View>
-        </Link>
-      )}
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ padding: 16, gap: 16 }}
-    />
+            >
+              <ItemTitleDescription
+                title={item.title}
+                description={item.description}
+              />
+
+              <IconSymbol
+                style={{
+                  alignSelf: "center",
+                }}
+                name="chevron.right"
+                size={24}
+                color={Gray}
+              />
+            </View>
+          </Link>
+        )}
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={{ padding: 16, gap: 16 }}
+      />
+    </ImageBackground>
   );
 }
 

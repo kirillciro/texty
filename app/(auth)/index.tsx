@@ -35,6 +35,28 @@ export default function Index() {
       }
     }
   };
+
+  const handleSignInWithApple = async () => {
+    try {
+      const { createdSessionId, setActive } = await startSSOFlow({
+        strategy: "oauth_apple",
+        redirectUrl: AuthSession.makeRedirectUri(),
+      });
+
+      if (createdSessionId) {
+        setActive!({ session: createdSessionId });
+      } else {
+        // theres no session, handle accordingly
+      }
+    } catch (error) {
+      if (isClerkAPIResponseError(error)) {
+        setErrors(error.errors);
+      } else {
+        console.error("Unexpected error during Apple sign-in:", error);
+      }
+    }
+  };
+
   const handleSignInWithPasskeys = async () => {
     try {
       const signInAttempt = await signIn?.authenticateWithPasskey({
@@ -70,26 +92,35 @@ export default function Index() {
         >
           <View
             style={{
-              width: 120,
-              height: 120,
-              borderRadius: 60,
-              backgroundColor: "rgba(255, 255, 255, 0.05)",
+              width: 140,
+              height: 140,
+              borderRadius: 70,
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
               borderWidth: 2,
-              borderColor: "rgba(255, 255, 255, 0.1)",
+              borderColor: "rgba(255, 255, 255, 0.15)",
               alignItems: "center",
               justifyContent: "center",
-              marginBottom: 24,
+              marginBottom: 32,
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 8 },
+              shadowOpacity: 0.3,
+              shadowRadius: 16,
+              elevation: 10,
             }}
           >
             <Image
-              source={require("@/assets/images/logo.png")}
-              style={{ width: 80, height: 80 }}
+              source={require("@/assets/images/texty-icon-round.png")}
+              style={{
+                width: 120,
+                height: 120,
+                borderRadius: 60,
+              }}
             />
           </View>
 
           <Text
             style={{
-              fontSize: 42,
+              fontSize: 48,
               fontWeight: "800",
               letterSpacing: 0.5,
               marginBottom: 12,
@@ -142,7 +173,14 @@ export default function Index() {
         </View>
 
         {/* Auth Buttons */}
-        <View style={{ width: "100%", gap: 12, paddingBottom: 20 }}>
+        <View
+          style={{
+            width: "100%",
+            gap: 16,
+            paddingBottom: 20,
+            paddingHorizontal: 4,
+          }}
+        >
           {/* Passkeys Button */}
           <TouchableOpacity
             onPress={handleSignInWithPasskeys}
@@ -168,6 +206,38 @@ export default function Index() {
               }}
             >
               Sign in with Passkeys
+            </Text>
+          </TouchableOpacity>
+
+          {/* Apple Button */}
+          <TouchableOpacity
+            onPress={handleSignInWithApple}
+            style={{
+              backgroundColor: "#000000",
+              paddingVertical: 16,
+              paddingHorizontal: 20,
+              borderRadius: 20,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
+              borderWidth: 1,
+              borderColor: "rgba(255, 255, 255, 0.1)",
+            }}
+          >
+            <Image
+              source={require("@/assets/images/apple-icon-white.png")}
+              style={{ width: 22, height: 22 }}
+            />
+            <Text
+              style={{
+                color: "#FFFFFF",
+                fontSize: 16,
+                fontWeight: "700",
+                letterSpacing: 0.3,
+              }}
+            >
+              Continue with Apple
             </Text>
           </TouchableOpacity>
 

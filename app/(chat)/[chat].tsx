@@ -15,6 +15,7 @@ import React from "react";
 import {
   Alert,
   Image,
+  ImageBackground,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -266,288 +267,300 @@ export default function Chat() {
         }}
       />
       <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
-        <KeyboardAvoidingView
+        <ImageBackground
+          source={require("@/assets/images/texty-bg.png")}
           style={{ flex: 1 }}
-          behavior={"padding"}
-          keyboardVerticalOffset={headerHeight}
+          imageStyle={{ opacity: 0.05 }}
+          resizeMode="repeat"
         >
-          <LegendList
-            ref={listRef}
-            data={messages}
-            extraData={showDeleteForMessage}
-            renderItem={({ item }) => {
-              const isSender = item.senderId === user?.id;
-              const senderRole = getUserRoleByEmail(item.senderEmail);
-              const showRoleBadge =
-                senderRole === "admin" || senderRole === "editor";
-              const roleBadgeColor = senderRole === "admin" ? Gold : Purple;
-              const roleBadgeIcon =
-                senderRole === "admin" ? "crown.fill" : "pencil";
-              const roleBadgeText = senderRole === "admin" ? "Admin" : "Editor";
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={"padding"}
+            keyboardVerticalOffset={headerHeight}
+          >
+            <LegendList
+              ref={listRef}
+              data={messages}
+              extraData={showDeleteForMessage}
+              renderItem={({ item }) => {
+                const isSender = item.senderId === user?.id;
+                const senderRole = getUserRoleByEmail(item.senderEmail);
+                const showRoleBadge =
+                  senderRole === "admin" || senderRole === "editor";
+                const roleBadgeColor = senderRole === "admin" ? Gold : Purple;
+                const roleBadgeIcon =
+                  senderRole === "admin" ? "crown.fill" : "pencil";
+                const roleBadgeText =
+                  senderRole === "admin" ? "Admin" : "Editor";
+                const roleBadgeBorderColor =
+                  senderRole === "admin"
+                    ? "rgba(255, 215, 0, 0.6)"
+                    : "rgba(157, 78, 221, 0.6)";
 
-              return (
-                <View
-                  style={{
-                    marginVertical: 4,
-                    marginHorizontal: 12,
-                    maxWidth: "75%",
-                    alignSelf: isSender ? "flex-end" : "flex-start",
-                  }}
-                >
-                  {/* Name and avatar row */}
+                return (
                   <View
                     style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      marginBottom: 6,
-                      gap: 8,
+                      marginVertical: 4,
+                      marginHorizontal: 12,
+                      maxWidth: "75%",
                       alignSelf: isSender ? "flex-end" : "flex-start",
                     }}
                   >
-                    <Image
-                      source={{ uri: item.senderPhoto }}
+                    {/* Name and avatar row */}
+                    <View
                       style={{
-                        width: 24,
-                        height: 24,
-                        borderRadius: 12,
-                      }}
-                    />
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        fontWeight: "600",
-                        color: "rgba(255, 255, 255, 0.7)",
-                        letterSpacing: 0.3,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginBottom: 6,
+                        gap: 8,
+                        alignSelf: isSender ? "flex-end" : "flex-start",
                       }}
                     >
-                      {item.senderName}
-                    </Text>
-                    {showRoleBadge && (
-                      <View
+                      <Image
+                        source={{ uri: item.senderPhoto }}
                         style={{
-                          paddingHorizontal: 8,
-                          paddingVertical: 3,
-                          borderRadius: 10,
-                          backgroundColor: `${roleBadgeColor}18`,
-                          borderWidth: 1.5,
-                          borderColor: `${roleBadgeColor}55`,
-                          flexDirection: "row",
-                          alignItems: "center",
-                          gap: 4,
-                        }}
-                      >
-                        <IconSymbol
-                          name={roleBadgeIcon}
-                          size={11}
-                          color={roleBadgeColor}
-                        />
-                        <Text
-                          style={{
-                            fontSize: 10,
-                            fontWeight: "600",
-                            color: roleBadgeColor,
-                            letterSpacing: 0.5,
-                          }}
-                        >
-                          {roleBadgeText}
-                        </Text>
-                      </View>
-                    )}
-                  </View>
-
-                  {/* Message bubble with long-press delete */}
-                  <View>
-                    <Pressable
-                      onLongPress={() => {
-                        if (canModerate) {
-                          console.log(
-                            "Long press detected, showing delete for:",
-                            item.$id
-                          );
-                          Haptics.impactAsync(
-                            Haptics.ImpactFeedbackStyle.Medium
-                          );
-                          setShowDeleteForMessage(item.$id!);
-                        } else {
-                          console.log(
-                            "User cannot moderate, canModerate:",
-                            canModerate
-                          );
-                        }
-                      }}
-                      delayLongPress={1000}
-                    >
-                      <View
-                        style={{
-                          backgroundColor: isSender ? Primary : Secondary,
-                          paddingHorizontal: 16,
-                          paddingVertical: 12,
-                          borderRadius: 20,
-                          borderBottomRightRadius: isSender ? 4 : 20,
-                          borderBottomLeftRadius: isSender ? 20 : 4,
-                          borderWidth: 1,
-                          borderColor: isSender
-                            ? "rgba(255, 255, 255, 0.2)"
-                            : "rgba(255, 255, 255, 0.15)",
-                          shadowColor: "#000",
-                          shadowOffset: { width: 0, height: 3 },
-                          shadowOpacity: 0.25,
-                          shadowRadius: 6,
-                          elevation: 4,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontSize: 15,
-                            lineHeight: 20,
-                            color: "white",
-                          }}
-                        >
-                          {item.content}
-                        </Text>
-                        <Text
-                          style={{
-                            fontSize: 10,
-                            color: "rgba(255, 255, 255, 0.6)",
-                            marginTop: 6,
-                            alignSelf: "flex-end",
-                            fontWeight: "500",
-                          }}
-                        >
-                          {new Date(item.$createdAt!).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: true,
-                          })}
-                        </Text>
-                      </View>
-                    </Pressable>
-
-                    {/* Compact delete action - slides down on long press */}
-                    {showDeleteForMessage === item.$id && (
-                      <Pressable
-                        onPress={() => {
-                          console.log("Delete button pressed for:", item.$id);
-                          setShowDeleteForMessage(null);
-                          handleDeleteMessage(item.$id!, item.content);
-                        }}
-                        style={({ pressed }) => ({
-                          marginTop: 6,
-                          alignSelf: isSender ? "flex-end" : "flex-start",
-                          backgroundColor: pressed
-                            ? "rgba(255, 59, 48, 0.18)"
-                            : "rgba(255, 59, 48, 0.12)",
+                          width: 24,
+                          height: 24,
                           borderRadius: 12,
-                          borderWidth: 1,
-                          borderColor: pressed
-                            ? "rgba(255, 59, 48, 0.4)"
-                            : "rgba(255, 59, 48, 0.3)",
-                          paddingHorizontal: 12,
-                          paddingVertical: 6,
-                          flexDirection: "row",
-                          alignItems: "center",
-                          gap: 6,
-                        })}
+                        }}
+                      />
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          fontWeight: "600",
+                          color: "rgba(255, 255, 255, 0.7)",
+                          letterSpacing: 0.3,
+                        }}
                       >
-                        <IconSymbol
-                          name="trash.fill"
-                          size={13}
-                          color="#FF3B30"
-                        />
-                        <Text
+                        {item.senderName}
+                      </Text>
+                      {showRoleBadge && (
+                        <View
                           style={{
-                            fontSize: 12,
-                            fontWeight: "600",
-                            color: "#FF3B30",
+                            paddingHorizontal: 8,
+                            paddingVertical: 3,
+                            borderRadius: 10,
+                            backgroundColor: `${roleBadgeColor}18`,
+                            borderWidth: 1.5,
+                            borderColor: roleBadgeBorderColor,
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 4,
                           }}
                         >
-                          Delete
-                        </Text>
-                      </Pressable>
-                    )}
-                  </View>
-                </View>
-              );
-            }}
-            keyExtractor={(item) => item?.$id ?? "unknown"}
-            contentContainerStyle={{ padding: 10 }}
-            recycleItems={true} //
-            initialScrollIndex={messages.length - 1}
-            alignItemsAtEnd
-            maintainScrollAtEnd
-            maintainScrollAtEndThreshold={0.5}
-            maintainVisibleContentPosition
-            estimatedItemSize={100}
-          />
+                          <IconSymbol
+                            name={roleBadgeIcon}
+                            size={11}
+                            color={roleBadgeColor}
+                          />
+                          <Text
+                            style={{
+                              fontSize: 10,
+                              fontWeight: "600",
+                              color: roleBadgeColor,
+                              letterSpacing: 0.5,
+                            }}
+                          >
+                            {roleBadgeText}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "flex-end",
-              paddingHorizontal: 12,
-              paddingVertical: 8,
-              borderRadius: 24,
-              backgroundColor: "rgba(26, 26, 26, 0.28)",
-              borderWidth: 1,
-              borderColor: "rgba(107, 107, 107, 0.26)",
-              marginBottom: 10,
-              marginHorizontal: 12,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 8,
-              elevation: 3,
-            }}
-          >
-            <TextInput
-              placeholder="Type a message..."
-              value={messageContent}
-              onChangeText={setMessageContent}
-              style={{
-                fontSize: 16,
-                minHeight: 40,
-                maxHeight: 120,
-                color: "white",
-                flex: 1,
-                paddingHorizontal: 12,
-                paddingTop: 10,
-                paddingBottom: 10,
+                    {/* Message bubble with long-press delete */}
+                    <View>
+                      <Pressable
+                        onLongPress={() => {
+                          if (canModerate) {
+                            console.log(
+                              "Long press detected, showing delete for:",
+                              item.$id
+                            );
+                            Haptics.impactAsync(
+                              Haptics.ImpactFeedbackStyle.Medium
+                            );
+                            setShowDeleteForMessage(item.$id!);
+                          } else {
+                            console.log(
+                              "User cannot moderate, canModerate:",
+                              canModerate
+                            );
+                          }
+                        }}
+                        delayLongPress={500}
+                      >
+                        <View
+                          style={{
+                            backgroundColor: isSender ? Primary : Secondary,
+                            paddingHorizontal: 16,
+                            paddingVertical: 12,
+                            borderRadius: 20,
+                            borderBottomRightRadius: isSender ? 4 : 20,
+                            borderBottomLeftRadius: isSender ? 20 : 4,
+                            borderWidth: 1,
+                            borderColor: isSender
+                              ? "rgba(255, 255, 255, 0.2)"
+                              : "rgba(255, 255, 255, 0.15)",
+                            shadowColor: "#000",
+                            shadowOffset: { width: 0, height: 3 },
+                            shadowOpacity: 0.25,
+                            shadowRadius: 6,
+                            elevation: 4,
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              lineHeight: 20,
+                              color: "white",
+                            }}
+                          >
+                            {item.content}
+                          </Text>
+                          <Text
+                            style={{
+                              fontSize: 10,
+                              color: "rgba(255, 255, 255, 0.6)",
+                              marginTop: 6,
+                              alignSelf: "flex-end",
+                              fontWeight: "500",
+                            }}
+                          >
+                            {new Date(item.$createdAt!).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
+                          </Text>
+                        </View>
+                      </Pressable>
+
+                      {/* Compact delete action - slides down on long press */}
+                      {showDeleteForMessage === item.$id && (
+                        <Pressable
+                          onPress={() => {
+                            console.log("Delete button pressed for:", item.$id);
+                            setShowDeleteForMessage(null);
+                            handleDeleteMessage(item.$id!, item.content);
+                          }}
+                          style={({ pressed }) => ({
+                            marginTop: 6,
+                            alignSelf: isSender ? "flex-end" : "flex-start",
+                            backgroundColor: pressed
+                              ? "rgba(255, 59, 48, 0.18)"
+                              : "rgba(255, 59, 48, 0.12)",
+                            borderRadius: 12,
+                            borderWidth: 1,
+                            borderColor: pressed
+                              ? "rgba(255, 59, 48, 0.4)"
+                              : "rgba(255, 59, 48, 0.3)",
+                            paddingHorizontal: 12,
+                            paddingVertical: 6,
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 6,
+                          })}
+                        >
+                          <IconSymbol
+                            name="trash.fill"
+                            size={13}
+                            color="#FF3B30"
+                          />
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              fontWeight: "600",
+                              color: "#FF3B30",
+                            }}
+                          >
+                            Delete
+                          </Text>
+                        </Pressable>
+                      )}
+                    </View>
+                  </View>
+                );
               }}
-              multiline
-              placeholderTextColor="rgba(255, 255, 255, 0.4)"
+              keyExtractor={(item) => item?.$id ?? "unknown"}
+              contentContainerStyle={{ padding: 10 }}
+              recycleItems={true} //
+              initialScrollIndex={messages.length - 1}
+              alignItemsAtEnd
+              maintainScrollAtEnd
+              maintainScrollAtEndThreshold={0.5}
+              maintainVisibleContentPosition
+              estimatedItemSize={100}
             />
-            <Pressable
-              disabled={messageContent.trim() === ""}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                setMessageContent(""); // Clear input immediately
-                sendMessage();
+
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-end",
+                paddingHorizontal: 12,
+                paddingVertical: 8,
+                borderRadius: 24,
+                backgroundColor: "rgba(26, 26, 26, 0.28)",
+                borderWidth: 1,
+                borderColor: "rgba(107, 107, 107, 0.26)",
+                marginBottom: 10,
+                marginHorizontal: 12,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 8,
+                elevation: 3,
               }}
-              style={({ pressed }) => ({
-                width: 36,
-                height: 36,
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 18,
-                backgroundColor:
-                  messageContent.trim() === ""
-                    ? "transparent"
-                    : pressed
-                    ? `${Primary}CC` // 80% opacity when pressed
-                    : Primary,
-                marginBottom: 2,
-                marginLeft: 8,
-                transform: pressed ? [{ scale: 0.9 }] : [{ scale: 1 }],
-              })}
             >
-              <IconSymbol
-                name="paperplane.fill"
-                size={18}
-                color={messageContent.trim() === "" ? Gray : "white"}
+              <TextInput
+                placeholder="Type a message..."
+                value={messageContent}
+                onChangeText={setMessageContent}
+                style={{
+                  fontSize: 16,
+                  minHeight: 40,
+                  maxHeight: 120,
+                  color: "white",
+                  flex: 1,
+                  paddingHorizontal: 12,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}
+                multiline
+                placeholderTextColor="rgba(255, 255, 255, 0.4)"
               />
-            </Pressable>
-          </View>
-        </KeyboardAvoidingView>
+              <Pressable
+                disabled={messageContent.trim() === ""}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  setMessageContent(""); // Clear input immediately
+                  sendMessage();
+                }}
+                style={({ pressed }) => ({
+                  width: 36,
+                  height: 36,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: 18,
+                  backgroundColor:
+                    messageContent.trim() === ""
+                      ? "transparent"
+                      : pressed
+                      ? `${Primary}CC` // 80% opacity when pressed
+                      : Primary,
+                  marginBottom: 2,
+                  marginLeft: 8,
+                  transform: pressed ? [{ scale: 0.9 }] : [{ scale: 1 }],
+                })}
+              >
+                <IconSymbol
+                  name="paperplane.fill"
+                  size={18}
+                  color={messageContent.trim() === "" ? Gray : "white"}
+                />
+              </Pressable>
+            </View>
+          </KeyboardAvoidingView>
+        </ImageBackground>
       </SafeAreaView>
     </>
   );

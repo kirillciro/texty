@@ -105,6 +105,8 @@ export default function Profile() {
                 backgroundColor: "rgba(255, 255, 255, 0.05)",
                 borderWidth: 2,
                 borderColor: "rgba(255, 255, 255, 0.15)",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <Image
