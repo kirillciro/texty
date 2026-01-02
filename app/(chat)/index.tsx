@@ -1,6 +1,7 @@
 import { IconSymbol } from "@/components/icon-symbol";
 import { Text } from "@/components/Text";
 import { appwriteConfig, db } from "@/utils/appwrite";
+import { cleanupInactiveChatRooms } from "@/utils/chatroom-cleanup";
 import { Gray } from "@/utils/colors";
 import { ChatRoom } from "@/utils/types";
 import { Link, useFocusEffect } from "expo-router";
@@ -14,12 +15,16 @@ export default function Index() {
 
   React.useEffect(() => {
     fetchChatRooms();
+    // Run cleanup on initial load
+    cleanupInactiveChatRooms();
   }, []);
 
   // Refresh chat rooms when screen comes into focus
   useFocusEffect(
     React.useCallback(() => {
       fetchChatRooms();
+      // Also run cleanup when screen comes into focus
+      cleanupInactiveChatRooms();
     }, [])
   );
 
